@@ -2,70 +2,80 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>PojavTiers</title>
+<title>PojavTiers – Rankings</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+:root {
+  --bg: #0b0f16;
+  --card: #111827;
+  --border: #1f2937;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+}
+
 body {
   margin: 0;
-  background: #0b0f14;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #e5e7eb;
+  background: linear-gradient(180deg, #0b1220, #070b12);
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--text);
 }
 
 header {
-  padding: 14px;
+  padding: 16px;
   font-size: 22px;
-  font-weight: 900;
-  background: #0e1623;
-  border-bottom: 1px solid #1f2937;
+  font-weight: 700;
+  background: #0c1220;
+  border-bottom: 1px solid var(--border);
 }
 
-/* PLAYER ROW */
-.player {
+.container {
+  padding: 12px;
+}
+
+/* ROW */
+.row {
   display: flex;
   align-items: center;
-  background: #0f172a;
-  margin: 10px;
-  padding: 10px;
-  border-radius: 12px;
-  border: 1px solid #1f2937;
+  background: linear-gradient(90deg, #0f172a, #0b1220);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 12px;
 }
 
-/* SKEWED PANEL */
-.panel {
-  display: flex;
-  align-items: center;
-  transform: skew(-18deg);
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-/* GOLD / SILVER / BRONZE */
-.gold { background: #f5c542; }
-.silver { background: #bfc5c9; }
-.bronze { background: #c0722c; }
-
-/* RANK NUMBER */
+/* RANK BADGE */
 .rank {
+  min-width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 26px;
-  font-weight: 900;
-  padding: 0 14px;
+  font-weight: 800;
+  margin-right: 14px;
   color: #fff;
-  transform: skew(18deg);
 }
 
-/* SKIN IMAGE */
+.rank-1 .rank { background: linear-gradient(135deg, #facc15, #eab308); }
+.rank-2 .rank { background: linear-gradient(135deg, #cbd5e1, #94a3b8); }
+.rank-3 .rank { background: linear-gradient(135deg, #fb923c, #c2410c); }
+
+/* SKIN */
 .skin {
-  width: 44px;
-  height: 44px;
-  object-fit: cover;
-  transform: skew(18deg);
+  width: 58px;
+  height: 58px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  margin-right: 14px;
+  transform: perspective(600px) rotateY(-18deg) rotateZ(-2deg);
+  filter: drop-shadow(0 6px 8px rgba(0,0,0,.6));
 }
 
-/* INFO */
+/* PLAYER INFO */
 .info {
-  margin-left: 14px;
+  flex: 1;
 }
 
 .name {
@@ -73,20 +83,10 @@ header {
   font-weight: 700;
 }
 
-.subtitle {
-  font-size: 13px;
-  color: #9ca3af;
-}
-
-/* REGION */
-.region {
-  margin-left: auto;
-  background: #7f1d1d;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 6px 8px;
-  border-radius: 6px;
+.desc {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 2px;
 }
 </style>
 </head>
@@ -95,49 +95,38 @@ header {
 
 <header>PojavTiers — Rankings</header>
 
-<!-- #1 -->
-<div class="player">
-  <div class="panel gold">
-    <div class="rank">1.</div>
-    <img class="skin" src="https://minotar.net/helm/Marlowww/64">
+<div class="container">
+
+  <!-- #1 -->
+  <div class="row rank-1">
+    <div class="rank">1</div>
+    <img class="skin" src="https://visage.surgeplay.com/bust/Marlowww/128">
+    <div class="info">
+      <div class="name">Marlowww</div>
+      <div class="desc">Combat Grandmaster (435 points)</div>
+    </div>
   </div>
 
-  <div class="info">
-    <div class="name">Marlowww</div>
-    <div class="subtitle">Combat Grandmaster (435 points)</div>
+  <!-- #2 -->
+  <div class="row rank-2">
+    <div class="rank">2</div>
+    <img class="skin" src="https://visage.surgeplay.com/bust/ItzRealMe/128">
+    <div class="info">
+      <div class="name">ItzRealMe</div>
+      <div class="desc">Combat Master (330 points)</div>
+    </div>
   </div>
 
-  <div class="region">NA</div>
-</div>
-
-<!-- #2 -->
-<div class="player">
-  <div class="panel silver">
-    <div class="rank">2.</div>
-    <img class="skin" src="https://minotar.net/helm/ItzRealMe/64">
+  <!-- #3 -->
+  <div class="row rank-3">
+    <div class="rank">3</div>
+    <img class="skin" src="https://visage.surgeplay.com/bust/Swight/128">
+    <div class="info">
+      <div class="name">Swight</div>
+      <div class="desc">Combat Master (290 points)</div>
+    </div>
   </div>
 
-  <div class="info">
-    <div class="name">ItzRealMe</div>
-    <div class="subtitle">Combat Master (330 points)</div>
-  </div>
-
-  <div class="region">NA</div>
-</div>
-
-<!-- #3 -->
-<div class="player">
-  <div class="panel bronze">
-    <div class="rank">3.</div>
-    <img class="skin" src="https://minotar.net/helm/Swight/64">
-  </div>
-
-  <div class="info">
-    <div class="name">Swight</div>
-    <div class="subtitle">Combat Master (290 points)</div>
-  </div>
-
-  <div class="region">NA</div>
 </div>
 
 </body>
