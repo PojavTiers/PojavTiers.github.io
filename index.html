@@ -7,34 +7,33 @@
 
   <style>
     :root {
-      --bg: #0b0f16;
-      --panel: #111827;
-      --panel-border: #1f2937;
+      --bg: #070b12;
+      --panel: #0f172a;
+      --border: #1e293b;
       --text: #e5e7eb;
       --muted: #9ca3af;
-      --gold: #f4c430;
-      --silver: #9ca3af;
-      --bronze: #c7783a;
-      --red: #b91c1c;
+      --gold: #facc15;
+      --silver: #cbd5e1;
+      --bronze: #fb923c;
     }
 
     * {
       box-sizing: border-box;
-      font-family: "Segoe UI", system-ui, sans-serif;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     }
 
     body {
       margin: 0;
-      background: radial-gradient(1200px 600px at top, #121826, var(--bg));
+      background: radial-gradient(1200px 600px at top, #111827, var(--bg));
       color: var(--text);
     }
 
     header {
       padding: 16px;
       font-size: 22px;
-      font-weight: 700;
-      border-bottom: 1px solid var(--panel-border);
-      background: linear-gradient(to right, #0f172a, #020617);
+      font-weight: 800;
+      background: linear-gradient(to right, #020617, #020617);
+      border-bottom: 1px solid var(--border);
     }
 
     .container {
@@ -46,35 +45,37 @@
     .row {
       display: flex;
       align-items: center;
-      background: linear-gradient(180deg, #0f172a, #020617);
-      border: 1px solid var(--panel-border);
-      border-radius: 14px;
-      margin-bottom: 12px;
-      padding: 12px;
       gap: 14px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      margin-bottom: 12px;
+      padding: 14px;
+      background: linear-gradient(180deg, #020617, #020617);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.02),
+        0 15px 40px rgba(0,0,0,0.6);
     }
 
     .rank {
-      width: 52px;
-      height: 52px;
+      width: 50px;
+      height: 50px;
       border-radius: 12px;
       display: grid;
       place-items: center;
-      font-size: 20px;
       font-weight: 900;
+      font-size: 20px;
       transform: skewX(-10deg);
     }
 
-    .rank.gold { background: linear-gradient(135deg, #facc15, #f59e0b); color:#000 }
-    .rank.silver { background: linear-gradient(135deg, #d1d5db, #9ca3af); color:#000 }
-    .rank.bronze { background: linear-gradient(135deg, #fb923c, #b45309); color:#000 }
+    .gold { background: linear-gradient(135deg, #fde047, #f59e0b); color:#000 }
+    .silver { background: linear-gradient(135deg, #e5e7eb, #94a3b8); color:#000 }
+    .bronze { background: linear-gradient(135deg, #fdba74, #c2410c); color:#000 }
+    .normal { background: #1e293b; }
 
-    /* SKIN */
     .skin-wrap {
-      width: 70px;
-      height: 80px;
-      perspective: 600px;
+      width: 72px;
+      height: 86px;
+      perspective: 700px;
     }
 
     .skin {
@@ -82,9 +83,9 @@
       height: 100%;
       background-size: cover;
       background-position: center top;
-      transform: rotateY(-18deg) rotateZ(-2deg);
+      transform: rotateY(18deg) rotateZ(-2deg);
       border-radius: 10px;
-      box-shadow: 0 15px 35px rgba(0,0,0,.6);
+      box-shadow: 0 18px 40px rgba(0,0,0,.7);
     }
 
     .info {
@@ -92,70 +93,67 @@
     }
 
     .name {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 800;
-      letter-spacing: .2px;
     }
 
     .sub {
       font-size: 14px;
       color: var(--muted);
-      margin-top: 2px;
-    }
-
-    @media (max-width: 600px) {
-      .skin-wrap {
-        width: 60px;
-        height: 70px;
-      }
-      .name {
-        font-size: 18px;
-      }
     }
   </style>
 </head>
 
 <body>
-  <header>PojavTiers — Rankings</header>
+<header>PojavTiers — Rankings</header>
 
-  <div class="container">
+<div class="container">
 
-    <!-- #1 -->
-    <div class="row">
-      <div class="rank gold">1</div>
-      <div class="skin-wrap">
-        <div class="skin" style="background-image:url('https://mc-heads.net/body/Marlowww/left');"></div>
-      </div>
-      <div class="info">
-        <div class="name">Marlowww</div>
-        <div class="sub">Combat Grandmaster (435 points)</div>
-      </div>
+  <!-- PLAYER TEMPLATE -->
+  <!-- Copy later if you want more -->
+
+  <div class="row">
+    <div class="rank gold">1</div>
+    <div class="skin-wrap">
+      <div class="skin" style="background-image:url('https://mc-heads.net/body/Player1/right');"></div>
     </div>
-
-    <!-- #2 -->
-    <div class="row">
-      <div class="rank silver">2</div>
-      <div class="skin-wrap">
-        <div class="skin" style="background-image:url('https://mc-heads.net/body/ItzRealMe/left');"></div>
-      </div>
-      <div class="info">
-        <div class="name">ItzRealMe</div>
-        <div class="sub">Combat Master (330 points)</div>
-      </div>
+    <div class="info">
+      <div class="name">Player1</div>
+      <div class="sub">Combat Grandmaster</div>
     </div>
-
-    <!-- #3 -->
-    <div class="row">
-      <div class="rank bronze">3</div>
-      <div class="skin-wrap">
-        <div class="skin" style="background-image:url('https://mc-heads.net/body/Swight/left');"></div>
-      </div>
-      <div class="info">
-        <div class="name">Swight</div>
-        <div class="sub">Combat Master (290 points)</div>
-      </div>
-    </div>
-
   </div>
+
+  <div class="row">
+    <div class="rank silver">2</div>
+    <div class="skin-wrap">
+      <div class="skin" style="background-image:url('https://mc-heads.net/body/Player2/right');"></div>
+    </div>
+    <div class="info">
+      <div class="name">Player2</div>
+      <div class="sub">Combat Master</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="rank bronze">3</div>
+    <div class="skin-wrap">
+      <div class="skin" style="background-image:url('https://mc-heads.net/body/Player3/right');"></div>
+    </div>
+    <div class="info">
+      <div class="name">Player3</div>
+      <div class="sub">Combat Master</div>
+    </div>
+  </div>
+
+  <!-- 4–10 -->
+  <div class="row"><div class="rank normal">4</div><div class="skin-wrap"><div class="skin" style="background-image:url('https://mc-heads.net/body/Player4/right');"></div></div><div class="info"><div class="name">Player4</div><div class="sub">Combat Elite</div></div></div>
+  <div class="row"><div class="rank normal">5</div><div class="skin-wrap"><div class="skin" style="background-image:url('https://mc-heads.net/body/Player5/right');"></div></div><div class="info"><div class="name">Player5</div><div class="sub">Combat Elite</div></div></div>
+  <div class="row"><div class="rank normal">6</div><div class="skin-wrap"><div class="skin" style="background-image:url('https://mc-heads.net/body/Player6/right');"></div></div><div class="info"><div class="name">Player6</div><div class="sub">Combat Diamond</div></div></div>
+  <div class="row"><div class="rank normal">7</div><div class="skin-wrap"><div class="skin" style="background-image:url('https://mc-heads.net/body/Player7/right');"></div></div><div class="info"><div class="name">Player7</div><div class="sub">Combat Diamond</div></div></div>
+  <div class="row"><div class="rank normal">8</div><div class="skin-wrap"><div class="skin" style="background-image:url('https://mc-heads.net/body/Player8/right');"></div></div><div class="info"><div class="name">Player8</div><div class="sub">Combat Platinum</div></div></div>
+  <div class="row"><div class="rank normal">9</div><div class="skin-wrap"><div class="skin" style="background-image:url('https://mc-heads.net/body/Player9/right');"></div></div><div class="info"><div class="name">Player9</div><div class="sub">Combat Platinum</div></div></div>
+  <div class="row"><div class="rank normal">10</div><div class="skin-wrap"><div class="skin" style="background-image:url('https://mc-heads.net/body/Player10/right');"></div></div><div class="info"><div class="name">Player10</div><div class="sub">Combat Gold</div></div></div>
+
+</div>
 </body>
-</html>
+                                                                            </html>
