@@ -1,1 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PojavTiers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b0f14;
+      color: #e6e6e6;
+    }
+
+    header {
+      background: linear-gradient(90deg, #8b0000, #1a0000);
+      padding: 15px;
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      color: #ffdede;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 10px;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      background: #121821;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .row:hover {
+      background: #1a2230;
+    }
+
+    .rank {
+      width: 30px;
+      font-weight: bold;
+      color: #ff5555;
+    }
+
+    .skin {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .name {
+      flex: 1;
+      font-size: 16px;
+    }
+
+    .popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .popup-box {
+      background: #141a24;
+      border-radius: 12px;
+      padding: 20px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .popup img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 10px;
+    }
+
+    .close {
+      margin-top: 15px;
+      background: #8b0000;
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>POJAV TIERS</header>
+
+<div class="container" id="list"></div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-box">
+    <img id="popupSkin">
+    <h2 id="popupName"></h2>
+    <p id="popupTiers"></p>
+    <button class="close" onclick="closePopup()">Close</button>
+  </div>
+</div>
+
+<script>
+  const players = [
+    {name: "Steve", tiers: "NethPot: HT1 | Sword: LT2"},
+    {name: "Alex", tiers: "NethPot: LT1 | Sword: LT1"},
+    {name: "Player3", tiers: "NethPot: HT2 | Sword: LT3"},
+    {name: "Player4", tiers: "NethPot: LT2 | Sword: HT3"},
+    {name: "Player5", tiers: "NethPot: HT3 | Sword: HT2"},
+  ];
+
+  const list = document.getElementById("list");
+
+  for (let i = 0; i < players.length; i++) {
+    const p = players[i];
+
+    const row = document.createElement("div");
+    row.className = "row";
+    row.onclick = () => openPopup(p.name, p.tiers);
+
+    row.innerHTML = `
+      <div class="rank">${i + 1}</div>
+      <img class="skin" src="https://mc-heads.net/avatar/${p.name}/40">
+      <div class="name">${p.name}</div>
+    `;
+
+    list.appendChild(row);
+  }
+
+  function openPopup(name, tiers) {
+    document.getElementById("popup").style.display = "flex";
+    document.getElementById("popupName").innerText = name;
+    document.getElementById("popupTiers").innerText = tiers;
+    document.getElementById("popupSkin").src =
+      "https://mc-heads.net/avatar/" + name + "/80";
+  }
+
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+  }
+</script>
+
+</body>
+  </html>
