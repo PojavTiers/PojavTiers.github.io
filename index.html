@@ -1,141 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>PojavTiers 🏆 – Rankings</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <title>PojavTiers — Rankings</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
-body {
-  margin: 0;
-  background: linear-gradient(180deg, #0b1220, #070b12);
-  font-family: "Segoe UI", Roboto, Arial, sans-serif;
-  color: #e5e7eb;
-}
+  <style>
+    :root {
+      --bg: #0b0f16;
+      --panel: #111827;
+      --panel-border: #1f2937;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --gold: #f4c430;
+      --silver: #9ca3af;
+      --bronze: #c7783a;
+      --red: #b91c1c;
+    }
 
-header {
-  padding: 16px;
-  font-size: 22px;
-  font-weight: 700;
-  background: #0c1220;
-  border-bottom: 1px solid #1f2937;
-}
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", system-ui, sans-serif;
+    }
 
-.container {
-  padding: 12px;
-}
+    body {
+      margin: 0;
+      background: radial-gradient(1200px 600px at top, #121826, var(--bg));
+      color: var(--text);
+    }
 
-/* ROW */
-.row {
-  display: flex;
-  align-items: center;
-  background: linear-gradient(90deg, #0f172a, #0b1220);
-  border: 1px solid #1f2937;
-  border-radius: 16px;
-  padding: 14px;
-  margin-bottom: 14px;
-}
+    header {
+      padding: 16px;
+      font-size: 22px;
+      font-weight: 700;
+      border-bottom: 1px solid var(--panel-border);
+      background: linear-gradient(to right, #0f172a, #020617);
+    }
 
-/* RANK */
-.rank {
-  width: 54px;
-  height: 54px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
-  font-weight: 800;
-  color: #fff;
-  margin-right: 14px;
-}
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 12px;
+    }
 
-.rank-1 .rank { background: linear-gradient(135deg, #facc15, #eab308); }
-.rank-2 .rank { background: linear-gradient(135deg, #cbd5e1, #94a3b8); }
-.rank-3 .rank { background: linear-gradient(135deg, #fb923c, #c2410c); }
+    .row {
+      display: flex;
+      align-items: center;
+      background: linear-gradient(180deg, #0f172a, #020617);
+      border: 1px solid var(--panel-border);
+      border-radius: 14px;
+      margin-bottom: 12px;
+      padding: 12px;
+      gap: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
 
-/* ANGLED SKIN PANEL */
-.skin-panel {
-  width: 78px;
-  height: 78px;
-  background: linear-gradient(135deg, #111827, #020617);
-  clip-path: polygon(0 0, 88% 0, 100% 100%, 12% 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 16px;
-}
+    .rank {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      font-weight: 900;
+      transform: skewX(-10deg);
+    }
 
-/* SKIN */
-.skin {
-  width: 64px;
-  height: 64px;
-  transform: perspective(600px) rotateY(-22deg) rotateZ(-2deg);
-  image-rendering: pixelated;
-  filter: drop-shadow(0 8px 10px rgba(0,0,0,.7));
-}
+    .rank.gold { background: linear-gradient(135deg, #facc15, #f59e0b); color:#000 }
+    .rank.silver { background: linear-gradient(135deg, #d1d5db, #9ca3af); color:#000 }
+    .rank.bronze { background: linear-gradient(135deg, #fb923c, #b45309); color:#000 }
 
-/* INFO */
-.info {
-  flex: 1;
-}
+    /* SKIN */
+    .skin-wrap {
+      width: 70px;
+      height: 80px;
+      perspective: 600px;
+    }
 
-.name {
-  font-size: 18px;
-  font-weight: 700;
-}
+    .skin {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center top;
+      transform: rotateY(-18deg) rotateZ(-2deg);
+      border-radius: 10px;
+      box-shadow: 0 15px 35px rgba(0,0,0,.6);
+    }
 
-.desc {
-  font-size: 14px;
-  color: #9ca3af;
-  margin-top: 2px;
-}
-</style>
+    .info {
+      flex: 1;
+    }
+
+    .name {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
+
+    .sub {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    @media (max-width: 600px) {
+      .skin-wrap {
+        width: 60px;
+        height: 70px;
+      }
+      .name {
+        font-size: 18px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <header>PojavTiers — Rankings</header>
 
-<header>PojavTiers — Rankings</header>
+  <div class="container">
 
-<div class="container">
-
-  <!-- #1 -->
-  <div class="row rank-1">
-    <div class="rank">1</div>
-    <div class="skin-panel">
-      <img class="skin" src="https://crafatar.com/renders/body/Marlowww?scale=3&overlay">
+    <!-- #1 -->
+    <div class="row">
+      <div class="rank gold">1</div>
+      <div class="skin-wrap">
+        <div class="skin" style="background-image:url('https://mc-heads.net/body/Marlowww/left');"></div>
+      </div>
+      <div class="info">
+        <div class="name">Marlowww</div>
+        <div class="sub">Combat Grandmaster (435 points)</div>
+      </div>
     </div>
-    <div class="info">
-      <div class="name">Marlowww</div>
-      <div class="desc">Combat Grandmaster (435 points)</div>
+
+    <!-- #2 -->
+    <div class="row">
+      <div class="rank silver">2</div>
+      <div class="skin-wrap">
+        <div class="skin" style="background-image:url('https://mc-heads.net/body/ItzRealMe/left');"></div>
+      </div>
+      <div class="info">
+        <div class="name">ItzRealMe</div>
+        <div class="sub">Combat Master (330 points)</div>
+      </div>
     </div>
+
+    <!-- #3 -->
+    <div class="row">
+      <div class="rank bronze">3</div>
+      <div class="skin-wrap">
+        <div class="skin" style="background-image:url('https://mc-heads.net/body/Swight/left');"></div>
+      </div>
+      <div class="info">
+        <div class="name">Swight</div>
+        <div class="sub">Combat Master (290 points)</div>
+      </div>
+    </div>
+
   </div>
-
-  <!-- #2 -->
-  <div class="row rank-2">
-    <div class="rank">2</div>
-    <div class="skin-panel">
-      <img class="skin" src="https://crafatar.com/renders/body/ItzRealMe?scale=3&overlay">
-    </div>
-    <div class="info">
-      <div class="name">ItzRealMe</div>
-      <div class="desc">Combat Master (330 points)</div>
-    </div>
-  </div>
-
-  <!-- #3 -->
-  <div class="row rank-3">
-    <div class="rank">3</div>
-    <div class="skin-panel">
-      <img class="skin" src="https://crafatar.com/renders/body/Swight?scale=3&overlay">
-    </div>
-    <div class="info">
-      <div class="name">Swight</div>
-      <div class="desc">Combat Master (290 points)</div>
-    </div>
-  </div>
-
-</div>
-
 </body>
 </html>
