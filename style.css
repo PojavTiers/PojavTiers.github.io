@@ -68,7 +68,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 90px;
+  width: 92px;
   height: 100%;
   display: flex;
   align-items: center;
@@ -79,10 +79,10 @@ body {
   font-size: 24px;
   color: #fff;
 
-  /* shape with sharp forward-slash ( / ) cut */
-  clip-path: polygon(0 0, 100% 10%, 90% 100%, 0 100%);
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  /* keep left corners round, right edge sharply sliced / */
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
 
   background: linear-gradient(180deg, #f6c33a 0%, #f4b02a 100%);
   box-shadow:
@@ -93,7 +93,7 @@ body {
   z-index: 0;
 }
 
-/* Variants */
+/* variants */
 .pos-1 { background: linear-gradient(180deg, #f6c33a 0%, #f4b02a 100%); }
 .pos-2 { background: linear-gradient(180deg, #e5e7eb 0%, #cbd5e1 100%); color:#111; }
 .pos-3 { background: linear-gradient(180deg, #fb923c 0%, #f97316 100%); }
