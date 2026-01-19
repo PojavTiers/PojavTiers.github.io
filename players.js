@@ -1,45 +1,48 @@
+// === Player Data ===
 const players = [
-  { rank: 1, name: "Marlowww", title: "Combat Grandmaster", points: 435 },
-  { rank: 2, name: "ItzRealMe", title: "Combat Master", points: 330 },
-  { rank: 3, name: "Swight", title: "Combat Master", points: 290 },
-  { rank: 4, name: "Player4", title: "Combat Ace", points: 250 },
-  { rank: 5, name: "Player5", title: "Combat Ace", points: 230 },
+  { name: "Marlowww", rank: "Combat Grandmaster", points: 435 },
+  { name: "ItzRealMe", rank: "Combat Master", points: 330 },
+  { name: "Swight", rank: "Combat Master", points: 290 },
+  { name: "Player4", rank: "Combat Ace", points: 250 },
+  { name: "Player5", rank: "Combat Ace", points: 230 },
 ];
 
-// Select the leaderboard container
+// === Generate Leaderboard ===
 const leaderboard = document.querySelector(".leaderboard");
-leaderboard.innerHTML = ""; // clear previous entries if any
 
-players.forEach((player) => {
+players.forEach((player, index) => {
   const card = document.createElement("div");
   card.className = "player-card";
 
-  // Rank badge
+  // Rank badge (color by rank)
   const rank = document.createElement("div");
-  rank.className = `rank-badge rank-${player.rank}`;
-  rank.textContent = `${player.rank}.`;
+  rank.className = "rank-badge";
+  rank.textContent = `${index + 1}.`;
 
-  // Player skin
+  if (index === 0) rank.style.background = "#f1c40f"; // Gold
+  else if (index === 1) rank.style.background = "#bdc3c7"; // Silver
+  else if (index === 2) rank.style.background = "#e67e22"; // Bronze
+  else rank.style.background = "#2c3e50"; // Default
+
+  // Player skin render (angled 3D style)
   const skin = document.createElement("img");
   skin.className = "player-skin";
-  skin.src = `https://minotar.net/armor/body/${player.name}/100.png`;
+  skin.src = `https://visage.surgeplay.com/full/${player.name}.png?yaw=20&pitch=-5&scale=6`;
   skin.alt = `${player.name}'s skin`;
-  skin.onerror = () => {
-    // fallback if skin not found
-    skin.src = "https://minotar.net/armor/body/Steve/100.png";
-  };
 
-  // Player info
+  // Info section (name, rank, points)
   const info = document.createElement("div");
-  info.className = "player-info";
+  info.className = "info";
   info.innerHTML = `
-    <h3>${player.name}</h3>
-    <p>${player.title} (${player.points} pts)</p>
+    <h2>${player.name}</h2>
+    <p>${player.rank} (${player.points} pts)</p>
   `;
 
-  // Append everything
+  // Append everything to card
   card.appendChild(rank);
   card.appendChild(skin);
   card.appendChild(info);
+
+  // Add card to leaderboard
   leaderboard.appendChild(card);
 });
