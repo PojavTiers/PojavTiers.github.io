@@ -22,11 +22,12 @@ players.forEach((p, i) => {
   row.className = "row";
 
   row.innerHTML = `
-    <div class="rank">${i + 1}</div>
-
-    <div class="skin-wrap">
-  <img class="skin" src="https://mc-heads.net/body/Marlowww/right">
-</div>
+  <div class="skin-wrap">
+    <img class="skin"
+         src="https://mc-heads.net/body/${player.name}/128"
+         alt="${player.name}">
+  </div>
+`;
     <div class="info">
       <div class="name">${p.name}</div>
       <div class="title">${p.title}</div>
