@@ -1,130 +1,146 @@
-/* ===== RESET ===== */
+/* ===== GLOBAL ===== */
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
 }
 
-/* ===== PAGE ===== */
 body {
-  background: radial-gradient(ellipse at top, #0f172a, #020617);
-  color: #e5e7eb;
-  min-height: 100vh;
+  margin: 0;
+  background: linear-gradient(180deg, #0b0f16, #0e141f);
+  color: #e6e6e6;
 }
 
 /* ===== TOP BAR ===== */
 .topbar {
-  background: linear-gradient(90deg, #020617, #020617dd);
-  padding: 16px 20px;
-  font-size: 22px;
+  background: #0d111a;
+  padding: 14px;
+  text-align: center;
+  font-size: 20px;
   font-weight: 700;
-  letter-spacing: 0.4px;
-  border-bottom: 1px solid #1e293b;
+  color: #ff4b4b;
+  border-bottom: 1px solid #1f2636;
 }
 
 /* ===== CONTAINER ===== */
 .container {
-  max-width: 900px;
-  margin: 24px auto;
-  padding: 0 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  max-width: 1100px;
+  margin: auto;
+  padding: 12px;
 }
 
-/* ===== PLAYER CARD ===== */
-.player-card {
-  background: linear-gradient(145deg, #020617, #020617cc);
-  border-radius: 18px;
-  padding: 18px;
+/* ===== ROW ===== */
+.row {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 18px;
-  position: relative;
+  background: #111827;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  height: 82px;
   overflow: hidden;
-  box-shadow:
-    0 20px 40px rgba(0,0,0,0.45),
-    inset 0 0 0 1px rgba(255,255,255,0.03);
+  border: 1px solid #1f2636;
 }
 
-/* ===== SKIN WRAPPER ===== */
-.skin-wrapper {
-  position: relative;
-  width: 100px;
-  height: 130px;
+/* ===== RANK BAR ===== */
+.rank-bar {
+  width: 70px;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: skewX(-15deg);
+  margin-left: -12px;
 }
 
-/* ===== RANK BADGE (BEHIND SKIN) ===== */
-.rank-badge {
-  position: absolute;
-  left: -14px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 58px;
-  height: 58px;
-  border-radius: 14px;
-  font-weight: 800;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 0;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+.rank-bar span {
+  transform: skewX(15deg);
+  font-size: 26px;
+  font-weight: 900;
 }
 
 /* Rank colors */
-.rank-1 { background: linear-gradient(135deg, #facc15, #f59e0b); color: #111; }
-.rank-2 { background: linear-gradient(135deg, #e5e7eb, #9ca3af); color: #111; }
-.rank-3 { background: linear-gradient(135deg, #fb923c, #ea580c); color: #111; }
+.rank-1 { background: linear-gradient(135deg, #f5c542, #e09b00); }
+.rank-2 { background: linear-gradient(135deg, #cfd8dc, #90a4ae); }
+.rank-3 { background: linear-gradient(135deg, #c97a3a, #8d4b20); }
 .rank-4,
-.rank-5 { background: linear-gradient(135deg, #64748b, #334155); }
+.rank-5,
+.rank-6,
+.rank-7,
+.rank-8,
+.rank-9,
+.rank-10 {
+  background: linear-gradient(135deg, #1c2333, #151b28);
+}
 
-/* ===== SKIN IMAGE ===== */
+/* ===== SKIN ===== */
+.skin-wrap {
+  position: relative;
+  width: 70px;
+  height: 110px;
+  margin-left: -10px;
+  overflow: visible;
+}
+
 .skin {
-  height: 120px;
-  z-index: 2;
-  transform: translateY(-6px) rotateY(-14deg);
-  filter: drop-shadow(0 18px 22px rgba(0,0,0,0.65));
-  transition: transform 0.3s ease;
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-8deg);
+  height: 100px;
+  filter: drop-shadow(0 8px 10px rgba(0,0,0,.6));
 }
 
-.player-card:hover .skin {
-  transform: translateY(-10px) rotateY(-6deg);
+/* ===== INFO ===== */
+.info {
+  flex: 1;
+  padding-left: 12px;
 }
 
-/* ===== PLAYER INFO ===== */
-.player-info {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.player-name {
-  font-size: 20px;
+.name {
+  font-size: 17px;
   font-weight: 700;
 }
 
-.player-tier {
-  font-size: 14px;
-  color: #94a3b8;
+.title {
+  font-size: 13px;
+  color: #a9b1c6;
+}
+
+/* ===== META ===== */
+.meta {
+  display: flex;
+  gap: 8px;
+  padding-right: 14px;
+}
+
+.region {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  background: #7c2d2d;
+}
+
+.tier {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  background: #1f2937;
+  color: #ffd166;
 }
 
 /* ===== MOBILE ===== */
 @media (max-width: 600px) {
-  .player-card {
-    padding: 14px;
-  }
-
-  .skin-wrapper {
-    width: 90px;
-    height: 120px;
+  .row {
+    height: 74px;
   }
 
   .skin {
-    height: 105px;
+    height: 90px;
+  }
+
+  .name {
+    font-size: 15px;
   }
 }
