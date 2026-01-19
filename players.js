@@ -25,13 +25,8 @@ players.forEach((p, i) => {
     <div class="rank">${i + 1}</div>
 
     <div class="skin-wrap">
-      <img
-        class="skin"
-        src="https://mc-heads.net/render/${p.name}/left"
-        alt="${p.name}"
-      >
-    </div>
-
+  <img class="skin" src="https://mc-heads.net/body/Marlowww/right">
+</div>
     <div class="info">
       <div class="name">${p.name}</div>
       <div class="title">${p.title}</div>
