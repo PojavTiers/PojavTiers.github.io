@@ -1,11 +1,13 @@
 /* === GLOBAL DARK BACKGROUND FIX === */
+/* === GLOBAL DARK BACKGROUND FIX === */
 html, body {
-  background: #0e1217 !important;
+  background: radial-gradient(circle at top, #0e1217 0%, #080b11 85%) !important;
   color: #fff !important;
   margin: 0;
   padding: 0;
   height: 100%;
   font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* ===========================
@@ -23,7 +25,6 @@ html, body {
   height: 100%;
 }
 body {
-  background: radial-gradient(circle at top, #0e1420, #05080f 85%);
   color: #0e1217;
   font-family: "Poppins", "Inter", system-ui, sans-serif;
   display: flex;
