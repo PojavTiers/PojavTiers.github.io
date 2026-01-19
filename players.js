@@ -1,80 +1,61 @@
-// players.js — clean working version for your style.css
-
 const players = [
   {
     name: "Marlowww",
-    rank: 1,
+    rank: "Combat Grandmaster",
+    points: 435,
     region: "NA",
-    skin: "https://mc-heads.net/body/Marlowww/100.png",
-    tiers: {
-      Nethpot: "HT1",
-      Axe: "HT2",
-      Vanilla: "HT3",
-      Sword: "HT2",
-      UHC: "LT1",
-      Mace: "HT1"
-    }
+    skin: "https://mineskin.eu/armor/body/Marlowww/80.png",
+    tiers: { Nethpot: "HT1", Axe: "HT2", Vanilla: "HT3", Sword: "HT2", UHC: "LT1", Mace: "HT1" }
   },
   {
     name: "Zerium",
-    rank: 2,
+    rank: "Combat Master",
+    points: 330,
     region: "EU",
-    skin: "https://mc-heads.net/body/Zerium/100.png",
-    tiers: {
-      Nethpot: "HT3",
-      Axe: "LT1",
-      Vanilla: "HT2",
-      Sword: "HT3",
-      UHC: "LT2",
-      Mace: "LT3"
-    }
+    skin: "https://mineskin.eu/armor/body/Zerium/80.png",
+    tiers: { Nethpot: "HT3", Axe: "LT1", Vanilla: "HT2", Sword: "HT3", UHC: "LT2", Mace: "LT3" }
   },
   {
     name: "Renix",
-    rank: 3,
+    rank: "Combat Ace",
+    points: 290,
     region: "AS",
-    skin: "https://mc-heads.net/body/Renix/100.png",
-    tiers: {
-      Nethpot: "LT3",
-      Axe: "HT3",
-      Vanilla: "HT4",
-      Sword: "LT2",
-      UHC: "HT1",
-      Mace: "LT1"
-    }
+    skin: "https://mineskin.eu/armor/body/Renix/80.png",
+    tiers: { Nethpot: "LT3", Axe: "HT3", Vanilla: "HT4", Sword: "LT2", UHC: "HT1", Mace: "LT1" }
   }
 ];
 
 const leaderboard = document.querySelector(".leaderboard");
 
-players.forEach((player) => {
+players.forEach((player, i) => {
+  // Player card container
   const card = document.createElement("div");
-  card.classList.add("player-card");
-  if (player.rank === 1) card.classList.add("rank-top1");
-  else if (player.rank === 2) card.classList.add("rank-top2");
-  else if (player.rank === 3) card.classList.add("rank-top3");
+  card.classList.add("player-card", `rank-${i + 1}`);
 
+  // Rank badge
   const badge = document.createElement("div");
-  badge.classList.add("rank-badge", `rank-${player.rank}`);
-  badge.innerHTML = `<span>${player.rank}</span>`;
+  badge.classList.add("rank-badge", `rank-${i + 1}`);
+  badge.innerHTML = `<span>${i + 1}</span>`;
 
+  // Player skin
   const skin = document.createElement("img");
-  skin.classList.add("player-skin");
   skin.src = player.skin;
-  skin.alt = player.name;
+  skin.alt = `${player.name}'s skin`;
+  skin.classList.add("player-skin");
 
+  // Player info (name + rank)
   const info = document.createElement("div");
   info.classList.add("player-info");
+  info.innerHTML = `<h3>${player.name}</h3><p>${player.rank} (${player.points} pts)</p>`;
 
-  const name = document.createElement("h3");
-  name.textContent = player.name;
-
+  // Region tag
   const region = document.createElement("div");
   region.classList.add("region-tag", `region-${player.region}`);
   region.textContent = player.region;
 
+  // Tier container (horizontal)
   const tiersContainer = document.createElement("div");
-  tiersContainer.classList.add("tiers");
+  tiersContainer.classList.add("tiers-container");
 
   Object.entries(player.tiers).forEach(([mode, tier]) => {
     const circle = document.createElement("div");
@@ -84,7 +65,7 @@ players.forEach((player) => {
     tiersContainer.appendChild(circle);
   });
 
-  info.appendChild(name);
+  // Append everything properly
   info.appendChild(region);
   info.appendChild(tiersContainer);
 
