@@ -1,100 +1,78 @@
-/* === GLOBAL DARK BACKGROUND FIX === */
-/* === GLOBAL DARK BACKGROUND FIX === */
-html, body {
-  background: radial-gradient(circle at top, #0e1217 0%, #080b11 85%) !important;
-  color: #fff !important;
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: 'Poppins', sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
+/* ===============================
+   POJAVTIERS FINAL STYLES (PART 1 of 2)
+   ===================================== */
 
-/* ===========================
-   POJAVTIERS LEADERBOARD 300-LINE STYLE (PART 1)
-   =========================== */
-
-/* === RESET & GLOBAL === */
+/* === GLOBAL RESET === */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 html, body {
   width: 100%;
   height: 100%;
-}
-body {
-  color: #0e1217;
   font-family: "Poppins", "Inter", system-ui, sans-serif;
+  background: radial-gradient(circle at top, #0e1217 0%, #05080f 85%);
+  color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  min-height: 100vh;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-/* === TYPOGRAPHY === */
-h1, h2, h3, h4 {
-  font-weight: 700;
-  color: #fff;
-}
-p {
-  color: #a1a1aa;
-  line-height: 1.4;
-}
-a { color: #38bdf8; text-decoration: none; }
-a:hover { text-decoration: underline; }
-
-/* === CONTAINER LAYOUT === */
-.container {
-  width: 95%;
-  max-width: 900px;
-  padding: 24px 16px 80px;
-}
+/* === TITLE === */
 h1 {
-  text-align: center;
+  margin: 36px 0 30px;
   font-size: 2rem;
-  margin-bottom: 30px;
-  background: linear-gradient(90deg,#facc15,#f97316);
+  font-weight: 700;
+  background: linear-gradient(90deg, #facc15, #f97316);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  letter-spacing: 0.5px;
+  text-align: center;
 }
 
-/* === PLAYER CARD BASE === */
+/* === CONTAINER === */
+.container {
+  width: 95%;
+  max-width: 920px;
+  margin: 0 auto;
+  padding-bottom: 60px;
+}
+
+/* === PLAYER CARD === */
 .player-card {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   background: rgba(255, 255, 255, 0.03);
-  border-radius: 20px;
-  margin: 14px 0;
-  padding: 16px 22px;
+  border-radius: 18px;
+  margin-bottom: 14px;
+  padding: 14px 20px;
+  overflow: hidden;
   box-shadow:
-    0 6px 14px rgba(0, 0, 0, 0.4),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    0 4px 12px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  transition: all 0.3s ease;
 }
 
-.
-}
-.player-card::after {
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(145deg,rgba(255,255,255,0.02),rgba(0,0,0,0.2));
-  opacity:.4;
-  pointer-events:none;
+.player-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.55),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 /* === RANK BADGE === */
 .rank-badge {
   position: relative;
-  width: 110px;
-  height: 70px;
+  width: 100px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,58 +80,52 @@ h1 {
   font-style: italic;
   font-size: 1.8rem;
   color: #fff;
-  text-shadow: 0 3px 4px rgba(0,0,0,0.6);
-  z-index: 1;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6.player-card:hover {
-  transform: translateY(-4px);
-  box-shadow:
-    0 10px 20px rgba(0, 0, 0, 0.5),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.06);
-}));
+  z-index: 2;
+  text-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
 }
+
 .rank-badge::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: var(--rank-color,#444);
-  clip-path: polygon(0 0, 95% 0, 100% 100%, 0 100%);
+  background: var(--badge-color, #555);
+  clip-path: polygon(0 0, 93% 0, 100% 100%, 0 100%);
   border-radius: 8px;
   z-index: -1;
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.2),
-    inset 0 -3px 5px rgba(0,0,0,0.3);
-}
-.rank-1::before { --rank-color: linear-gradient(180deg,#facc15,#eab308); }
-.rank-2::before { --rank-color: linear-gradient(180deg,#d1d5db,#9ca3af); }
-.rank-3::before { --rank-color: linear-gradient(180deg,#fb923c,#f97316); }
-.rank-4::before { --rank-color: linear-gradient(180deg,#475569,#1f2937); }
-.rank-badge span {
-  position: relative;
-  z-index: 2;
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -3px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* === PLAYER SKIN (FAKE 3D TILT) === */
-/* === PLAYER SKIN (CLEAN FRONT FACING LIKE FIRST VERSION) === */
+.rank-1::before { --badge-color: linear-gradient(180deg,#facc15,#eab308); }
+.rank-2::before { --badge-color: linear-gradient(180deg,#d1d5db,#9ca3af); }
+.rank-3::before { --badge-color: linear-gradient(180deg,#fb923c,#f97316); }
+.rank-4::before { --badge-color: linear-gradient(180deg,#475569,#1f2937); }
+.rank-5::before { --badge-color: linear-gradient(180deg,#374151,#111827); }
+
+/* === PLAYER SKIN === */
 .player-skin {
-  width: 65px;
-  height: 90px;
-  margin-left: 15px;
-  border-radius: 6px;
-  object-fit: contain;
+  width: 70px;
+  height: 100px;
+  border-radius: 10px;
+  margin-left: -10px;
+  margin-right: 16px;
   image-rendering: pixelated;
   background: #111;
+  object-fit: contain;
+  transform: perspective(600px) rotateY(-8deg);
   box-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.4),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+    4px 6px 10px rgba(0,0,0,0.4),
+    inset 0 0 0 1px rgba(255,255,255,0.04);
+  z-index: 3;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .player-card:hover .player-skin {
-  transform: scale(1.05);
+  transform: perspective(600px) rotateY(-6deg) scale(1.03);
   box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.45),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    6px 10px 14px rgba(0,0,0,0.45),
+    inset 0 0 0 1px rgba(255,255,255,0.06);
 }
 
 /* === PLAYER INFO === */
@@ -161,276 +133,271 @@ h1 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 18px;
-  z-index: 3;
+  gap: 3px;
 }
+
 .player-info h3 {
   font-size: 1rem;
   font-weight: 700;
-  margin-bottom: 3px;
   color: #fff;
 }
+
 .player-info p {
   font-size: 0.85rem;
-  color: #9ca3af;
+  color: #a1a1aa;
 }
 
-/* === ICONS + TAGS BASE === */
-.icons {
+.player-info small {
+  color: #9ca3af;
+  font-size: 0.8rem;
+}
+
+/* === REGION BADGE === */
+.region-badge {
+  background-color: #ef4444;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 6px;
+  padding: 3px 8px;
+  margin-left: auto;
+  text-transform: uppercase;
+  box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+
+.region-NA { background:#dc2626; }
+.region-EU { background:#16a34a; }
+.region-AS { background:#7e22ce; }
+.region-SA { background:#2563eb; }
+.region-OC { background:#ea580c; }
+
+/* === GAMEMODE CIRCLE GROUP === */
+.mode-circles {
   display: flex;
   align-items: center;
   gap: 6px;
   margin-top: 6px;
+  flex-wrap: wrap;
 }
-.icon {
-  width: 26px;
-  height: 26px;
+
+.mode-circle {
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
+  font-size: 0.7rem;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
-  background: rgba(255,255,255,0.08);
-  color: #fff;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
-}
-.icon.sword { background:#2563eb; }
-.icon.potion { background:#a855f7; }
-.icon.heart { background:#ef4444; }
-.icon.ender { background:#22d3ee; color:#000; }
-.icon.hammer { background:#9ca3af; color:#000; }
-
-/* === REGION + TIER TAGS === */
-.region, .tier {
-  font-weight: 700;
-  font-size: 0.75rem;
-  padding: 4px 8px;
-  border-radius: 6px;
   text-transform: uppercase;
-  text-align: center;
-  margin-top: 4px;
-  display: inline-block;
-}
-.region-NA { background:#dc2626; color:#fff; }
-.region-EU { background:#16a34a; color:#fff; }
-.region-AS { background:#7e22ce; color:#fff; }
-.region-SA { background:#2563eb; color:#fff; }
-.region-OC { background:#ea580c; color:#fff; }
-
-.tier-HT1 { background:#facc15; color:#000; }
-.tier-HT2 { background:#d1d5db; color:#000; }
-.tier-HT3 { background:#fb923c; color:#000; }
-.tier-LT1 { background:#3b82f6; }
-.tier-LT2 { background:#2563eb; }
-.tier-LT3 { background:#1d4ed8; }
-/* === RANK-BASED GLOW EFFECTS === */
-.player-card.rank-top1::before,
-.player-card.rank-top2::before,
-.player-card.rank-top3::before {
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:14px;
-  z-index:0;
-  pointer-events:none;
-  opacity:.2;
-}
-.player-card.rank-top1::before {
-  background:radial-gradient(circle at 30% 30%,#fde04740,#facc1530,#0000);
-}
-.player-card.rank-top2::before {
-  background:radial-gradient(circle at 40% 40%,#d1d5db40,#9ca3af30,#0000);
-}
-.player-card.rank-top3::before {
-  background:radial-gradient(circle at 50% 50%,#fb923c40,#f9731630,#0000);
+  border: 2px solid #666;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* === HOVER/TAP ANIMATION === */
+.mode-circle:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 10px rgba(255,255,255,0.15);
+}
+
+/* === COLOR MAP FOR TIERS === */
+.mode-circle.HT1 { border-color: #dc2626; color: #dc2626; }
+.mode-circle.HT2 { border-color: #eab308; color: #eab308; }
+.mode-circle.HT3 { border-color: #fb923c; color: #fb923c; }
+.mode-circle.HT4 { border-color: #60a5fa; color: #60a5fa; }
+.mode-circle.HT5 { border-color: #22d3ee; color: #22d3ee; }
+
+.mode-circle.LT1 { border-color: #f87171; color: #f87171; }
+.mode-circle.LT2 { border-color: #facc15; color: #facc15; }
+.mode-circle.LT3 { border-color: #34d399; color: #34d399; }
+.mode-circle.LT4 { border-color: #3b82f6; color: #3b82f6; }
+.mode-circle.LT5 { border-color: #84cc16; color: #84cc16; }
+
+/* === TIER NAME TO GAMEMODE MAPPING === */
+.mode-circle[data-mode="Nethpot"] { background: rgba(255,0,0,0.05); }
+.mode-circle[data-mode="Axe"] { background: rgba(255,165,0,0.05); }
+.mode-circle[data-mode="Vanilla"] { background: rgba(255,255,255,0.05); }
+.mode-circle[data-mode="Sword"] { background: rgba(0,128,255,0.05); }
+.mode-circle[data-mode="UHC"] { background: rgba(0,255,128,0.05); }
+.mode-circle[data-mode="Mace"] { background: rgba(128,0,255,0.05); }
+
+/* === CARD GLOW FOR TOP 3 === */
+.player-card.rank-top1::after,
+.player-card.rank-top2::after,
+.player-card.rank-top3::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+.player-card.rank-top1::after {
+  background: radial-gradient(circle at 30% 30%, #facc15, #0000);
+}
+.player-card.rank-top2::after {
+  background: radial-gradient(circle at 40% 40%, #d1d5db, #0000);
+}
+.player-card.rank-top3::after {
+  background: radial-gradient(circle at 50% 50%, #fb923c, #0000);
+                  }
+/* ===============================
+   POJAVTIERS FINAL STYLES (PART 2 of 2)
+   ===================================== */
+
+/* === HOVER + ANIMATIONS === */
 .player-card {
-  transition:transform .25s ease,box-shadow .25s ease,background .25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
+
+.player-card:hover .player-info h3 {
+  color: #facc15;
+}
+
 .player-card:active {
-  transform:scale(.97);
-  box-shadow:0 2px 6px rgba(0,0,0,0.5);
+  transform: scale(0.98);
 }
 
-/* === SMOOTH ENTRY ANIMATION === */
+/* Smooth entry */
 @keyframes fadeUp {
-  0% {opacity:0; transform:translateY(20px);}
-  100% {opacity:1; transform:translateY(0);}
+  0% { opacity: 0; transform: translateY(15px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 .player-card {
-  animation:fadeUp .6s ease forwards;
+  animation: fadeUp 0.5s ease forwards;
 }
-.player-card:nth-child(1){animation-delay:.05s;}
-.player-card:nth-child(2){animation-delay:.1s;}
-.player-card:nth-child(3){animation-delay:.15s;}
-.player-card:nth-child(4){animation-delay:.2s;}
-.player-card:nth-child(5){animation-delay:.25s;}
+.player-card:nth-child(1) { animation-delay: 0.05s; }
+.player-card:nth-child(2) { animation-delay: 0.1s; }
+.player-card:nth-child(3) { animation-delay: 0.15s; }
+.player-card:nth-child(4) { animation-delay: 0.2s; }
+.player-card:nth-child(5) { animation-delay: 0.25s; }
 
-/* === TOPBAR + FOOTER === */
-.topbar {
-  width:100%;
-  background:linear-gradient(to right,#020617,#0c1425);
-  text-align:center;
-  padding:14px;
-  font-size:1.2rem;
-  font-weight:700;
-  color:#f1f5f9;
-  letter-spacing:.5px;
-  box-shadow:0 2px 6px rgba(0,0,0,0.5);
-}
+/* === FOOTER === */
 .footer {
-  margin-top:40px;
-  text-align:center;
-  font-size:.85rem;
-  color:#6b7280;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin: 40px 0;
+  opacity: 0.8;
 }
 
 /* === SCROLLBAR STYLING === */
 ::-webkit-scrollbar {
-  width:8px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background:#111827;
+  background: #111827;
 }
 ::-webkit-scrollbar-thumb {
-  background:#374151;
-  border-radius:8px;
+  background: #374151;
+  border-radius: 8px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background:#4b5563;
+  background: #4b5563;
 }
 
 /* === MEDIA QUERIES === */
-@media (max-width:800px){
-  .player-card{
-    padding:10px 14px;
+@media (max-width: 900px) {
+  .player-card {
+    padding: 12px 16px;
   }
-  .rank-badge{
-    width:90px;
-    height:55px;
-    font-size:1.5rem;
+  .rank-badge {
+    width: 90px;
+    height: 55px;
+    font-size: 1.5rem;
   }
-  .player-skin{
-    width:60px;
-    height:80px;
+  .player-skin {
+    width: 65px;
+    height: 90px;
   }
-}
-@media (max-width:600px){
-  h1{font-size:1.6rem;}
-  .player-card{
-    flex-direction:column;
-    align-items:flex-start;
-    padding:14px;
-  }
-  .rank-badge{
-    width:75px;
-    height:45px;
-    margin-bottom:6px;
-  }
-  .player-skin{
-    width:55px;
-    height:70px;
-    margin-left:0;
-  }
-  .player-info{
-    margin-left:0;
-    margin-top:6px;
-  }
-}
-@media (prefers-color-scheme:light){
-  body{background:#f5f5f5; color:#111;}
-  .player-card{background:#fff; box-shadow:0 2px 8px rgba(0,0,0,0.1);}
-  .rank-badge::before{box-shadow:none;}
-  .player-info p{color:#555;}
 }
 
-/* === UTILITY CLASSES === */
-.glow-gold{
-  box-shadow:0 0 12px 2px rgba(250,204,21,0.7);
+@media (max-width: 680px) {
+  h1 {
+    font-size: 1.6rem;
+  }
+  .player-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+  }
+  .rank-badge {
+    width: 75px;
+    height: 45px;
+    margin-bottom: 6px;
+  }
+  .player-skin {
+    width: 60px;
+    height: 80px;
+    margin-left: 0;
+  }
+  .player-info {
+    margin-left: 0;
+    margin-top: 8px;
+  }
+  .region-badge {
+    margin-left: 0;
+    margin-top: 6px;
+  }
 }
-.glow-silver{
-  box-shadow:0 0 12px 2px rgba(209,213,219,0.6);
-}
-.glow-bronze{
-  box-shadow:0 0 12px 2px rgba(251,146,60,0.6);
+
+/* === COLOR THEME OVERRIDES === */
+body {
+  background-color: #0e1217;
+  background-image: radial-gradient(circle at top, #0e1217 0%, #05080f 85%);
+  color: #fff;
 }
 
 /* === SMOOTH TRANSITIONS === */
-*{
-  transition:color .25s ease,background .25s ease,border .25s ease;
+* {
+  transition: color 0.25s ease, background 0.25s ease, border 0.25s ease;
+}
+
+/* === DEPTH + GLOW UTILITIES === */
+.glow-gold {
+  box-shadow: 0 0 14px 2px rgba(250, 204, 21, 0.7);
+}
+.glow-silver {
+  box-shadow: 0 0 14px 2px rgba(209, 213, 219, 0.6);
+}
+.glow-bronze {
+  box-shadow: 0 0 14px 2px rgba(251, 146, 60, 0.6);
+}
+
+/* === SMOOTH CARD BORDERS === */
+.player-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(0,0,0,0.15));
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* === CARD LAYER FIX === */
+.player-info,
+.rank-badge,
+.player-skin,
+.region-badge {
+  position: relative;
+  z-index: 2;
+}
+
+/* === LIGHT THEME FALLBACK === */
+@media (prefers-color-scheme: light) {
+  body {
+    background: #f9fafb;
+    color: #111;
+  }
+  .player-card {
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .player-info p { color: #555; }
+  .rank-badge::before { box-shadow: none; }
 }
 
 /* === END OF FILE === */
-
-.leaderboard {
-  width: 95%;
-  max-width: 900px;
-  margin: 60px auto;
-  background: transparent;
-}
-
-/* Each player card */
-.player-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #1a1e25; /* deep dark gray card background */
-  border-radius: 12px;
-  padding: 14px 18px;
-  margin-bottom: 12px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.player-row:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6);
-}
-
-/* Rank card colors */
-.rank-card span {
-  color: #fff;
-  font-weight: 700;
-  font-size: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-}
-
-.rank-1 { background: #f1c40f; }
-.rank-2 { background: #bdc3c7; }
-.rank-3 { background: #e67e22; }
-.rank-4 { background: #34495e; }
-.rank-5 { background: #2c3e50; }
-
-/* Skins */
-.player-skin {
-  width: 60px;
-  height: 100px;
-  object-fit: contain;
-}
-
-/* Tier circles */
-.tier-circle {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 10px;
-  margin: 0 3px;
-  font-weight: 600;
-}
-
-/* Region tag */
-.region-tag {
-  background-color: #ff4d4d;
-  color: #fff;
-  padding: 3px 8px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 700;
-}
