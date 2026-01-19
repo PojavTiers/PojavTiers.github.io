@@ -95,19 +95,32 @@ header{
 }
 /* SKIN ITSELF */
 .skin {
-  transform: scale(1.05);
-}
   position: absolute;
   bottom: -10px;
+
   left: 0;
-right: 0;
-margin: auto;
+  right: 0;
+  margin: auto;
 
   width: 56px;
   height: 90px;
 
   background-size: cover;
-  background-position: center 15%;
+  background-position: center 12%;
+  background-repeat: no-repeat;
+
+  transform:
+    perspective(900px)
+    rotateY(6deg)
+    rotateX(-10deg)
+    translateZ(26px)
+    scale(1.05);
+
+  transform-origin: center bottom;
+  z-index: 4;
+
+  filter: drop-shadow(0 10px 16px rgba(0,0,0,.55));
+}
 
   /* VERY subtle MCTiers tilt */
   transform: none;
