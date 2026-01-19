@@ -1,68 +1,64 @@
-/* ===== GLOBAL ===== */
 * {
   box-sizing: border-box;
-  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 body {
   margin: 0;
-  background: linear-gradient(180deg, #0b0f16, #0e141f);
-  color: #e6e6e6;
+  background: radial-gradient(circle at top, #0b1220, #02040a);
+  color: #e5e7eb;
 }
 
 /* ===== TOP BAR ===== */
 .topbar {
-  background: #0d111a;
-  padding: 14px;
-  text-align: center;
+  padding: 14px 18px;
   font-size: 20px;
   font-weight: 700;
-  color: #ff4b4b;
-  border-bottom: 1px solid #1f2636;
+  background: linear-gradient(to bottom, #0c1222, #070b16);
+  border-bottom: 1px solid #1e293b;
 }
 
-/* ===== CONTAINER ===== */
+/* ===== MAIN CONTAINER ===== */
 .container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
-/* ===== ROW ===== */
+/* ===== PLAYER ROW ===== */
 .row {
   position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background: #111827;
-  border-radius: 12px;
-  margin-bottom: 10px;
-  height: 82px;
+  height: 92px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #0e1628, #0a1020);
   overflow: hidden;
-  border: 1px solid #1f2636;
+  display: flex;
+  align-items: center;
+  padding-left: 64px;
 }
 
-/* ===== RANK BAR ===== */
+/* ===== RANK BAR (BACKGROUND) ===== */
 .rank-bar {
-  width: 70px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: skewX(-15deg);
-  margin-left: -12px;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
 .rank-bar span {
-  transform: skewX(15deg);
-  font-size: 26px;
-  font-weight: 900;
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 800;
+  font-size: 20px;
+  color: #020617;
 }
 
 /* Rank colors */
-.rank-1 { background: linear-gradient(135deg, #f5c542, #e09b00); }
-.rank-2 { background: linear-gradient(135deg, #cfd8dc, #90a4ae); }
-.rank-3 { background: linear-gradient(135deg, #c97a3a, #8d4b20); }
+.rank-1 { background: linear-gradient(90deg, #facc15, transparent); }
+.rank-2 { background: linear-gradient(90deg, #d1d5db, transparent); }
+.rank-3 { background: linear-gradient(90deg, #fb923c, transparent); }
 .rank-4,
 .rank-5,
 .rank-6,
@@ -70,78 +66,64 @@ body {
 .rank-8,
 .rank-9,
 .rank-10 {
-  background: linear-gradient(135deg, #1c2333, #151b28);
+  background: linear-gradient(90deg, #475569, transparent);
 }
 
 /* ===== SKIN ===== */
 .skin-wrap {
   position: relative;
-  width: 70px;
-  height: 110px;
-  margin-left: -10px;
-  overflow: visible;
+  z-index: 3;
+  width: 64px;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
 }
 
 .skin {
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%) rotate(-8deg);
-  height: 100px;
-  filter: drop-shadow(0 8px 10px rgba(0,0,0,.6));
+  height: 90px;
+  transform: translateY(6px) rotateY(-10deg);
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,.6));
 }
 
 /* ===== INFO ===== */
 .info {
-  flex: 1;
-  padding-left: 12px;
+  z-index: 3;
+  margin-left: 14px;
+  display: flex;
+  flex-direction: column;
 }
 
 .name {
-  font-size: 17px;
   font-weight: 700;
+  font-size: 16px;
 }
 
 .title {
   font-size: 13px;
-  color: #a9b1c6;
+  color: #9ca3af;
 }
 
-/* ===== META ===== */
+/* ===== META (RIGHT SIDE) ===== */
 .meta {
+  margin-left: auto;
+  margin-right: 14px;
+  z-index: 3;
   display: flex;
-  gap: 8px;
-  padding-right: 14px;
+  gap: 6px;
+}
+
+.region,
+.tier {
+  padding: 4px 8px;
+  font-size: 11px;
+  border-radius: 6px;
+  font-weight: 600;
 }
 
 .region {
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 700;
-  background: #7c2d2d;
+  background: #7c2d12;
 }
 
 .tier {
-  padding: 4px 8px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 700;
-  background: #1f2937;
-  color: #ffd166;
-}
-
-/* ===== MOBILE ===== */
-@media (max-width: 600px) {
-  .row {
-    height: 74px;
-  }
-
-  .skin {
-    height: 90px;
-  }
-
-  .name {
-    font-size: 15px;
-  }
+  background: #1d4ed8;
 }
