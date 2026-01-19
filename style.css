@@ -351,3 +351,82 @@ h1 {
 }
 
 /* === END OF FILE === */
+
+body {
+  background-color: #0e1217; /* dark navy-gray like McTiers */
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.leaderboard {
+  width: 95%;
+  max-width: 900px;
+  margin: 60px auto;
+  background: transparent;
+}
+
+/* Each player card */
+.player-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1a1e25; /* deep dark gray card background */
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.player-row:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6);
+}
+
+/* Rank card colors */
+.rank-card span {
+  color: #fff;
+  font-weight: 700;
+  font-size: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.rank-1 { background: #f1c40f; }
+.rank-2 { background: #bdc3c7; }
+.rank-3 { background: #e67e22; }
+.rank-4 { background: #34495e; }
+.rank-5 { background: #2c3e50; }
+
+/* Skins */
+.player-skin {
+  width: 60px;
+  height: 100px;
+  object-fit: contain;
+}
+
+/* Tier circles */
+.tier-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 10px;
+  margin: 0 3px;
+  font-weight: 600;
+}
+
+/* Region tag */
+.region-tag {
+  background-color: #ff4d4d;
+  color: #fff;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
