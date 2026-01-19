@@ -36,7 +36,6 @@ players.forEach((p, i) => {
 
   <div class="skin-wrap">
     <img class="skin" src="https://mc-heads.net/body/${p.name}/front">
-  </div>
 
   <div class="info">
     <div class="name">${p.name}</div>
