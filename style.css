@@ -1,91 +1,130 @@
+/* ===== RESET ===== */
 * {
   box-sizing: border-box;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-}
-
-body {
   margin: 0;
-  background: radial-gradient(1200px 600px at top, #0f172a, #070b12);
+  padding: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+/* ===== PAGE ===== */
+body {
+  background: radial-gradient(ellipse at top, #0f172a, #020617);
   color: #e5e7eb;
+  min-height: 100vh;
 }
 
+/* ===== TOP BAR ===== */
 .topbar {
-  padding: 16px;
+  background: linear-gradient(90deg, #020617, #020617dd);
+  padding: 16px 20px;
   font-size: 22px;
-  font-weight: 900;
+  font-weight: 700;
+  letter-spacing: 0.4px;
   border-bottom: 1px solid #1e293b;
-  background: #020617;
 }
 
+/* ===== CONTAINER ===== */
 .container {
   max-width: 900px;
-  margin: auto;
-  padding: 16px;
+  margin: 24px auto;
+  padding: 0 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.row {
+/* ===== PLAYER CARD ===== */
+.player-card {
+  background: linear-gradient(145deg, #020617, #020617cc);
+  border-radius: 18px;
+  padding: 18px;
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 18px;
-  margin-bottom: 16px;
-  background: linear-gradient(180deg, #020617, #020617);
-  border: 1px solid #1e293b;
-  border-radius: 18px;
-  box-shadow: 0 20px 50px rgba(0,0,0,.75);
-}
-
-/* Rank badge */
-.rank {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  font-weight: 900;
-  font-size: 18px;
-  color: #000;
-  clip-path: polygon(0 0,85% 0,100% 50%,85% 100%,0 100%,10% 50%);
-}
-
-.gold { background: linear-gradient(135deg,#fde047,#f59e0b); }
-.silver { background: linear-gradient(135deg,#e5e7eb,#94a3b8); }
-.bronze { background: linear-gradient(135deg,#fdba74,#c2410c); }
-.normal { background: #334155; color: #e5e7eb; }
-
-/* Skin card */
-.skin-panel {
+  gap: 18px;
   position: relative;
-  width: 96px;
-  height: 96px;
-  border-radius: 18px;
-  background: linear-gradient(135deg,#1f2937,#020617);
-  overflow: visible;
+  overflow: hidden;
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.45),
+    inset 0 0 0 1px rgba(255,255,255,0.03);
 }
 
-.skin {
+/* ===== SKIN WRAPPER ===== */
+.skin-wrapper {
+  position: relative;
+  width: 100px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== RANK BADGE (BEHIND SKIN) ===== */
+.rank-badge {
   position: absolute;
-  bottom: -6px;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 56px;
-  height: 92px;
-  background-size: cover;
-  background-position: center 12%;
-  transform: perspective(800px) rotateY(-18deg) translateY(6px);
-  filter: drop-shadow(0 12px 18px rgba(0,0,0,.6));
-}
-
-.info {
-  flex: 1;
-}
-
-.name {
-  font-size: 18px;
+  left: -14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
   font-weight: 800;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.4);
 }
 
-.sub {
+/* Rank colors */
+.rank-1 { background: linear-gradient(135deg, #facc15, #f59e0b); color: #111; }
+.rank-2 { background: linear-gradient(135deg, #e5e7eb, #9ca3af); color: #111; }
+.rank-3 { background: linear-gradient(135deg, #fb923c, #ea580c); color: #111; }
+.rank-4,
+.rank-5 { background: linear-gradient(135deg, #64748b, #334155); }
+
+/* ===== SKIN IMAGE ===== */
+.skin {
+  height: 120px;
+  z-index: 2;
+  transform: translateY(-6px) rotateY(-14deg);
+  filter: drop-shadow(0 18px 22px rgba(0,0,0,0.65));
+  transition: transform 0.3s ease;
+}
+
+.player-card:hover .skin {
+  transform: translateY(-10px) rotateY(-6deg);
+}
+
+/* ===== PLAYER INFO ===== */
+.player-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.player-name {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.player-tier {
   font-size: 14px;
-  color: #9ca3af;
+  color: #94a3b8;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
+  .player-card {
+    padding: 14px;
+  }
+
+  .skin-wrapper {
+    width: 90px;
+    height: 120px;
+  }
+
+  .skin {
+    height: 105px;
+  }
 }
