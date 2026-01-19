@@ -24,7 +24,7 @@ html, body {
 }
 body {
   background: radial-gradient(circle at top, #0e1420, #05080f 85%);
-  color: #f8fafc;
+  color: #0e1217;
   font-family: "Poppins", "Inter", system-ui, sans-serif;
   display: flex;
   flex-direction: column;
