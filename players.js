@@ -32,21 +32,22 @@ players.forEach((p, i) => {
   if (i === 2) rankClass = "rank rank-3";
 
   row.innerHTML = `
-    <div class="${rankClass}">${i + 1}</div>
+  <div class="rank rank-${i + 1}">${i + 1}</div>
 
-    <div class="skin-wrap">
-      <img
-        class="skin"
-        src="https://minotar.net/body/${p.name}/100.png"
-        alt="${p.name}"
-      >
-    </div>
+  <div class="skin-wrap">
+    <img class="skin" src="${p.skin}">
+  </div>
 
-    <div class="info">
-      <div class="name">${p.name}</div>
-      <div class="title">${p.title}</div>
-    </div>
-  `;
+  <div class="info">
+    <div class="name">${p.name}</div>
+    <div class="title">${p.title}</div>
+  </div>
+
+  <div class="meta">
+    <div class="region">${p.region}</div>
+    <div class="tier">${p.tier}</div>
+  </div>
+`;
 
   leaderboard.appendChild(row);
 });
