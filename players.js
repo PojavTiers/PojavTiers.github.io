@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
       <div class="region ${regionClass}">${p.region}</div>
       <div class="tier ${tierClass}">${p.tier}</div>
+      <link rel="stylesheet" href="style.css?v=5">
     `;
 
     container.appendChild(row);
