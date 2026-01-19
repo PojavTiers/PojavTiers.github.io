@@ -18,9 +18,7 @@ function generateLeaderboard() {
         <div class="rank-badge rank-${p.rank <= 3 ? p.rank : 4}">${p.rank}.</div>
         <img
           class="player-skin"
-          src="https://crafatar.com/renders/body/${p.name}?scale=6&overlay"
-          alt="${p.name}'s skin"
-        />
+          img.src = `https://minotar.net/armor/body/${player.name}/100.png`;
         <link rel="stylesheet" href="style.css" />
         <div class="player-info">
           <h3>${p.name}</h3>
