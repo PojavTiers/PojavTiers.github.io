@@ -32,21 +32,23 @@ players.forEach((p, i) => {
   if (i === 2) rankClass = "rank rank-3";
 
   row.innerHTML = `
-  <div class="rank rank-${i + 1}">${i + 1}</div>
+  <div class="row">
+  <div class="rank rank-1">1</div>
 
   <div class="skin-wrap">
-    <img class="skin" src="https://mc-heads.net/body/${p.name}/front">
+    <img class="skin" src="https://mc-heads.net/render/USERNAME/left">
+  </div>
 
   <div class="info">
-    <div class="name">${p.name}</div>
-    <div class="title">${p.title}</div>
+    <div class="name">Marlowww</div>
+    <div class="title">Combat Grandmaster (435 pts)</div>
   </div>
 
   <div class="meta">
-    <div class="region">${p.region}</div>
-    <div class="tier">${p.tier}</div>
+    <div class="region">NA</div>
+    <div class="tier">HT1</div>
   </div>
-`;
+</div>
 
   leaderboard.appendChild(row);
 });
