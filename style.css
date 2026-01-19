@@ -132,27 +132,26 @@ h1 {
 }
 
 /* === PLAYER SKIN (FAKE 3D TILT) === */
+/* === PLAYER SKIN (CLEAN FRONT FACING LIKE FIRST VERSION) === */
 .player-skin {
-  width: 70px;
+  width: 65px;
   height: 90px;
-  margin-left: -22px;
-  border-radius: 8px;
-  transform: perspective(400px) rotateY(-10deg) rotateX(5deg);
-  transform-origin: center;
+  margin-left: 15px;
+  border-radius: 6px;
+  object-fit: contain;
   image-rendering: pixelated;
   background: #111;
-  object-fit: contain;
   box-shadow:
-    4px 4px 10px rgba(0,0,0,0.4),
-    -2px -2px 6px rgba(255,255,255,0.05);
-  z-index: 2;
-  transition: transform .3s ease, box-shadow .3s ease;
+    0 2px 6px rgba(0, 0, 0, 0.4),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
+
 .player-card:hover .player-skin {
-  transform: perspective(400px) rotateY(-6deg) rotateX(3deg) scale(1.03);
+  transform: scale(1.05);
   box-shadow:
-    6px 6px 16px rgba(0,0,0,0.45),
-    -3px -3px 8px rgba(255,255,255,0.06);
+    0 4px 12px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 /* === PLAYER INFO === */
