@@ -70,19 +70,24 @@ body {
 
 /* ===== SKIN CARD ===== */
 .skin-wrap {
-  height: 120px;
+  position: relative;
   width: 90px;
-
+  height: 120px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
-
-  background: radial-gradient(circle at top, #111827, #020617);
-  border-radius: 14px;
+  overflow: visible;
 }
 .skin {
-  height: 110px;
-  transform: rotateY(-18deg) translateY(6px);
+  width: 90px;
+  height: auto;
+
+  transform:
+    translateY(18px)
+    scale(1.25)
+    rotateY(-15deg);
+
+  filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.6));
   image-rendering: pixelated;
 }
 
