@@ -1,3 +1,13 @@
+/* === GLOBAL DARK BACKGROUND FIX === */
+html, body {
+  background: #0e1217 !important;
+  color: #fff !important;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+}
+
 /* ===========================
    POJAVTIERS LEADERBOARD 300-LINE STYLE (PART 1)
    =========================== */
