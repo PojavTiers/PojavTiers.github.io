@@ -41,17 +41,21 @@ body {
 /* ===== RANK BAR (BACKGROUND) ===== */
 .rank-bar {
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 18px;
+  transform: translateY(-50%);
   z-index: 1;
 }
 
 .rank-bar span {
   position: absolute;
-  left: 16px;
+  left: 14px;
   top: 50%;
   transform: translateY(-50%);
   font-weight: 800;
-  font-size: 20px;
+  font-size: 16px;
   color: #020617;
 }
 
