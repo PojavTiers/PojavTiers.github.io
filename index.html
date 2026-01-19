@@ -135,6 +135,12 @@ header{
 }
 /* SKIN ITSELF */
 .skin {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+
+  /* 🔥 HARD RESET so rank can't mess with it */
+  will-change: transform;
+
   position: absolute;
   bottom: -10px;
 
