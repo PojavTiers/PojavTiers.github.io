@@ -73,9 +73,11 @@ body {
 .rank-normal { background: #374151; color: #fff; }
 
 /* ===== SKIN CARD ===== */
+/* ===== SKIN (MCTIERS STYLE) ===== */
+
 .skin-wrap {
-  width: 110px;
-  height: 96px;
+  width: 64px;
+  height: 72px;
 
   display: flex;
   align-items: flex-start;
@@ -85,22 +87,14 @@ body {
 }
 
 .skin {
-  width: 90px;
+  width: 64px;
   height: auto;
 
   transform:
-    translateY(-12px)
-    rotateY(-22deg);
+    translateY(-18px)
+    scale(0.85)
+    rotateY(-18deg);
 
-  image-rendering: pixelated;
-}
-
-  transform:
-    translateY(18px)
-    scale(1.25)
-    rotateY(-15deg);
-
-  filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.6));
   image-rendering: pixelated;
 }
 
