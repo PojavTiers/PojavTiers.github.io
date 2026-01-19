@@ -28,34 +28,29 @@ const players = [
 const leaderboard = document.querySelector(".leaderboard");
 
 players.forEach((player, i) => {
-  // Player card
   const card = document.createElement("div");
   card.classList.add("player-card", `rank-${i + 1}`);
 
-  // Rank badge
   const badge = document.createElement("div");
-  badge.classList.add("rank-badge", `rank-${i + 1}`);
+  badge.classList.add("rank-badge");
   badge.innerHTML = `<span>${i + 1}</span>`;
 
-  // Player skin
   const skin = document.createElement("img");
   skin.src = player.skin;
   skin.alt = `${player.name}'s skin`;
   skin.classList.add("player-skin");
 
-  // Player info
   const info = document.createElement("div");
   info.classList.add("player-info");
   info.innerHTML = `<h3>${player.name}</h3><p>${player.rank} (${player.points} pts)</p>`;
 
-  // Region
   const region = document.createElement("div");
   region.classList.add("region-tag", `region-${player.region}`);
   region.textContent = player.region;
 
-  // Tiers row (horizontal)
+  // Tiers in a row, right beside the name
   const tiersRow = document.createElement("div");
-  tiersRow.classList.add("tiers-container");
+  tiersRow.classList.add("tiers-row");
 
   Object.entries(player.tiers).forEach(([mode, tier]) => {
     const circle = document.createElement("div");
@@ -65,11 +60,9 @@ players.forEach((player, i) => {
     tiersRow.appendChild(circle);
   });
 
-  // Combine info
   info.appendChild(region);
   info.appendChild(tiersRow);
 
-  // Assemble card
   card.appendChild(badge);
   card.appendChild(skin);
   card.appendChild(info);
