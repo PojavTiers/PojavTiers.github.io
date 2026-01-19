@@ -79,8 +79,8 @@ body {
   font-size: 24px;
   color: #fff;
 
-  /* keep left corners round, right edge sharply sliced / */
-  clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+  /* "/" slant: top-right farther out, bottom-right shorter */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 85% 100%);
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
 
@@ -90,14 +90,21 @@ body {
     inset 0 -3px 4px rgba(0,0,0,0.25),
     0 3px 6px rgba(0,0,0,0.35);
   text-shadow: 1px 2px 2px rgba(0,0,0,0.55);
-  z-index: 0;
+
+  z-index: 0; /* keep it behind the skin */
 }
 
-/* variants */
-.pos-1 { background: linear-gradient(180deg, #f6c33a 0%, #f4b02a 100%); }
-.pos-2 { background: linear-gradient(180deg, #e5e7eb 0%, #cbd5e1 100%); color:#111; }
-.pos-3 { background: linear-gradient(180deg, #fb923c 0%, #f97316 100%); }
-.pos-normal { background: linear-gradient(180deg, #475569 0%, #1f2937 100%); color:#fff; }
+/* make sure the skin container sits above */
+.skin-wrap {
+  position: relative;
+  z-index: 1;
+  margin-left: 70px;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 /* ---------- SKIN RENDER ---------- */
 .skin-wrap {
   z-index: 1;
