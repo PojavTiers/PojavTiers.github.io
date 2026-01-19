@@ -1,33 +1,35 @@
-// players.js — auto-generates skin renders
-
 const players = [
-  { name: "Marlowww", rank: 1, title: "Combat Grandmaster", points: 435 },
-  { name: "ItzRealMe", rank: 2, title: "Combat Master", points: 330 },
-  { name: "Swight", rank: 3, title: "Combat Master", points: 290 },
-  { name: "Player4", rank: 4, title: "Combat Ace", points: 250 },
-  { name: "Player5", rank: 5, title: "Combat Ace", points: 230 },
+  { rank: 1, name: "Marlowww", title: "Combat Grandmaster", points: 435 },
+  { rank: 2, name: "ItzRealMe", title: "Combat Master", points: 330 },
+  { rank: 3, name: "Swight", title: "Combat Master", points: 290 },
+  { rank: 4, name: "Player4", title: "Combat Ace", points: 250 },
+  { rank: 5, name: "Player5", title: "Combat Ace", points: 230 },
 ];
 
-function generateLeaderboard() {
-  const leaderboard = document.querySelector(".leaderboard");
+const container = document.querySelector(".leaderboard");
 
-  leaderboard.innerHTML = players
-    .map(
-      (p) => `
-      <div class="player-card">
-        <div class="rank-badge rank-${p.rank <= 3 ? p.rank : 4}">${p.rank}.</div>
-        <img
-          class="player-skin"
-          img.src = `https://minotar.net/armor/body/${player.name}/100.png`;
-        <link rel="stylesheet" href="style.css" />
-        <div class="player-info">
-          <h3>${p.name}</h3>
-          <p>${p.title} (${p.points} pts)</p>
-        </div>
-      </div>
-    `
-    )
-    .join("");
-}
+players.forEach((player) => {
+  const card = document.createElement("div");
+  card.className = "player-card";
 
-document.addEventListener("DOMContentLoaded", generateLeaderboard);
+  const rank = document.createElement("div");
+  rank.className = `rank-badge rank-${player.rank}`;
+  rank.textContent = player.rank;
+
+  const skin = document.createElement("img");
+  skin.className = "player-skin";
+  skin.src = `https://minotar.net/armor/body/${player.name}/100.png`;
+  skin.alt = `${player.name}'s skin`;
+
+  const info = document.createElement("div");
+  info.className = "player-info";
+  info.innerHTML = `
+    <h3>${player.name}</h3>
+    <p>${player.title} (${player.points} pts)</p>
+  `;
+
+  card.appendChild(rank);
+  card.appendChild(skin);
+  card.appendChild(info);
+  container.appendChild(card);
+});
