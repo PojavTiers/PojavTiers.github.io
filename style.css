@@ -65,6 +65,7 @@ body {
 /* ---------- ANGLED RANK RIBBON (BEHIND SKIN) ---------- */
 /* ---------- RANK CARD (your improved style) ---------- */
 /* Improved angled rank badge - closer to your screenshot look */
+
 .pos {
   position: absolute;
   top: 0;
@@ -77,37 +78,29 @@ body {
 
   font-family: "Poppins", "Inter", sans-serif;
   font-weight: 900;
-  font-size: 26px;
+  font-size: 25px;
+  letter-spacing: -0.5px;
   color: #fff;
-  text-shadow:
-    2px 3px 3px rgba(0, 0, 0, 0.6),
-    0 0 2px rgba(255, 255, 255, 0.2);
 
-  background: linear-gradient(145deg, #facc15, #eab308);
+  /* your golden gradient */
+  background: linear-gradient(165deg, #f5c534 0%, #f4b431 100%);
   clip-path: polygon(0 0, 84% 0, 100% 50%, 84% 100%, 0 100%);
-  border-radius: 10px;
+  border-radius: 12px;
+
+  /* subtle depth */
   box-shadow:
-    inset 0 1px 2px rgba(255, 255, 255, 0.3),
-    inset -2px 0 6px rgba(0, 0, 0, 0.25),
-    0 2px 6px rgba(0, 0, 0, 0.4);
+    inset 0 1px 1px rgba(255, 255, 255, 0.3),
+    0 3px 4px rgba(0, 0, 0, 0.35);
+  text-shadow: 1px 2px 2px rgba(0, 0, 0, 0.5);
+
   z-index: 0;
-  letter-spacing: -1px;
 }
 
-/* Color variants */
-.pos-1 {
-  background: linear-gradient(145deg, #facc15, #eab308);
-}
-.pos-2 {
-  background: linear-gradient(145deg, #d1d5db, #9ca3af);
-  color: #111;
-}
-.pos-3 {
-  background: linear-gradient(145deg, #fb923c, #f97316);
-}
-.pos-normal {
-  background: linear-gradient(145deg, #4b5563, #1f2937);
-}
+/* Variants */
+.pos-1 { background: linear-gradient(165deg, #f5c534 0%, #f4b431 100%); }
+.pos-2 { background: linear-gradient(165deg, #e5e7eb 0%, #cbd5e1 100%); color: #111; }
+.pos-3 { background: linear-gradient(165deg, #fb923c 0%, #f97316 100%); }
+.pos-normal { background: linear-gradient(165deg, #4b5563 0%, #1f2937 100%); }
 
 /* ---------- SKIN RENDER ---------- */
 .skin-wrap {
