@@ -74,20 +74,26 @@ body {
 
 /* ===== SKIN CARD ===== */
 .skin-wrap {
-  position: relative;
-  width: 64px;
-  height: 110px;
-  overflow: hidden;
+  width: 110px;
+  height: 96px;
+
   display: flex;
   align-items: flex-start;
   justify-content: center;
+
+  overflow: hidden;
 }
 
 .skin {
-  width: 96px;
+  width: 90px;
   height: auto;
-  transform: translateY(-12px);
+
+  transform:
+    translateY(-12px)
+    rotateY(-22deg);
+
   image-rendering: pixelated;
+}
 
   transform:
     translateY(18px)
