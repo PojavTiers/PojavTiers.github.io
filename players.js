@@ -21,6 +21,7 @@ function generateLeaderboard() {
           src="https://crafatar.com/renders/body/${p.name}?scale=6&overlay"
           alt="${p.name}'s skin"
         />
+        <link rel="stylesheet" href="style.css" />
         <div class="player-info">
           <h3>${p.name}</h3>
           <p>${p.title} (${p.points} pts)</p>
