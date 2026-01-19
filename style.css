@@ -1,8 +1,8 @@
 /* ============================================================
-   PojavTiers — McTiers-inspired clean dark leaderboard
+   PojavTiers — refined McTiers-inspired leaderboard (clean + mobile safe)
    ============================================================ */
 
-/* ---------- Base Reset ---------- */
+/* ---------- RESET ---------- */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -11,14 +11,15 @@
 }
 
 body {
-  background: radial-gradient(1000px 500px at top, #0b1220, #05080f);
+  background: radial-gradient(1000px 600px at top, #0b1220, #05080f);
   color: #e5e7eb;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* ---------- Header / Footer ---------- */
+/* ---------- HEADER / FOOTER ---------- */
 .topbar {
   text-align: center;
   font-size: 22px;
@@ -41,58 +42,58 @@ body {
   padding: 20px;
 }
 
-/* ---------- Leaderboard Row ---------- */
+/* ---------- ROW CARD ---------- */
 .row {
   position: relative;
-  display: grid;
-  grid-template-columns: 60px 90px 1fr 130px 70px;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   background: rgba(255,255,255,0.03);
   border-radius: 14px;
-  padding: 14px 18px;
+  padding: 12px 18px;
   margin-bottom: 14px;
-  backdrop-filter: blur(6px);
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .row:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 10px rgba(255,255,255,0.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
 }
 
-/* ---------- Angled Rank Ribbon (behind skin) ---------- */
+/* ---------- ANGLED RANK RIBBON (BEHIND SKIN) ---------- */
 .pos {
   position: absolute;
   top: 0;
   left: 0;
-  width: 80px;
+  width: 100px;
   height: 100%;
-  clip-path: polygon(0 0, 80% 0, 100% 50%, 80% 100%, 0 100%);
+  clip-path: polygon(0 0, 75% 0, 100% 50%, 75% 100%, 0 100%);
   display: flex;
   align-items: center;
   justify-content: flex-start;
   font-size: 22px;
   font-weight: 900;
-  padding-left: 18px;
-  color: #000;
-  text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+  padding-left: 20px;
   z-index: 0;
+  color: #000;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.4);
 }
-.pos-1 { background: linear-gradient(to bottom right, #facc15, #eab308); }
-.pos-2 { background: linear-gradient(to bottom right, #d1d5db, #9ca3af); }
-.pos-3 { background: linear-gradient(to bottom right, #fb923c, #f97316); }
-.pos-normal { background: linear-gradient(to bottom right, #374151, #1f2937); color: #fff; }
 
-/* ---------- Player Skin ---------- */
+.pos-1 { background: linear-gradient(135deg, #facc15, #eab308); }
+.pos-2 { background: linear-gradient(135deg, #d1d5db, #9ca3af); }
+.pos-3 { background: linear-gradient(135deg, #fb923c, #f97316); }
+.pos-normal { background: linear-gradient(135deg, #374151, #1f2937); color: #fff; }
+
+/* ---------- SKIN RENDER ---------- */
 .skin-wrap {
   z-index: 1;
+  margin-left: 70px; /* pushes it right so ribbon shows behind */
   width: 72px;
   height: 72px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 60px; /* pushes skin right so ribbon shows behind */
 }
 .skin {
   height: 72px;
@@ -101,12 +102,13 @@ body {
   filter: drop-shadow(0 1px 3px rgba(0,0,0,0.6));
 }
 
-/* ---------- Info ---------- */
+/* ---------- INFO ---------- */
 .info {
+  flex: 1;
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  margin-left: 16px;
 }
 .name {
   font-size: 16px;
@@ -118,39 +120,40 @@ body {
   color: #9ca3af;
 }
 
-/* ---------- Icons ---------- */
+/* ---------- ICONS ---------- */
 .icons {
   display: flex;
   gap: 6px;
-  justify-content: center;
+  margin-right: 10px;
 }
 .icon {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 13px;
   color: #fff;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.1);
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
 }
 .icon.sword { background: #2563eb; }
 .icon.potion { background: #a855f7; }
 .icon.heart { background: #ef4444; }
-.icon.ender { background: #22d3ee; color:#000; }
-.icon.hammer { background: #9ca3af; color:#000; }
+.icon.ender { background: #22d3ee; color: #000; }
+.icon.hammer { background: #9ca3af; color: #000; }
 
-/* ---------- Region & Tier ---------- */
+/* ---------- REGION & TIER ---------- */
 .region, .tier {
-  text-align: center;
+  z-index: 1;
   font-weight: 700;
   font-size: 13px;
-  padding: 6px 8px;
+  padding: 6px 10px;
   border-radius: 6px;
   text-transform: uppercase;
-  z-index: 1;
+  text-align: center;
+  min-width: 48px;
 }
 .region-NA { background: #dc2626; color: #fff; }
 .region-EU { background: #16a34a; color: #fff; }
@@ -165,13 +168,25 @@ body {
 .tier-LT2 { background: #2563eb; }
 .tier-LT3 { background: #1d4ed8; }
 
-/* ---------- Mobile ---------- */
+/* ---------- RESPONSIVE ---------- */
 @media (max-width: 700px) {
   .row {
-    grid-template-columns: 40px 60px 1fr;
-    padding: 10px 14px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px;
   }
-  .region, .tier, .icons { display: none; }
-  .pos { width: 60px; }
-  .skin-wrap { margin-left: 40px; }
+  .pos {
+    width: 80px;
+    height: 40px;
+    clip-path: polygon(0 0, 90% 0, 100% 100%, 0 100%);
+    font-size: 18px;
+    justify-content: center;
+  }
+  .skin-wrap {
+    margin: 8px auto 0;
+  }
+  .icons, .region, .tier {
+    margin-top: 6px;
+  }
+  .icons { justify-content: center; }
 }
