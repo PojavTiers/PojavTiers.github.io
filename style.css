@@ -28,14 +28,12 @@ body {
 
 /* ===== PLAYER ROW ===== */
 .row {
-  position: relative;
-  height: 92px;
-  border-radius: 14px;
-  background: linear-gradient(180deg, #0e1628, #0a1020);
+  position: relative; /* 🔥 THIS IS THE KEY */
+  height: 96px;
+  margin-bottom: 18px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #020617, #020617cc);
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  padding-left: 64px;
 }
 
 /* ===== RANK BAR (BACKGROUND) ===== */
@@ -44,18 +42,19 @@ body {
   left: 0;
   right: 0;
   top: 50%;
-  height: 18px;
+  height: 16px;
   transform: translateY(-50%);
   z-index: 1;
+  opacity: 0.95;
 }
 
 .rank-bar span {
   position: absolute;
-  left: 14px;
+  left: 12px;
   top: 50%;
   transform: translateY(-50%);
   font-weight: 800;
-  font-size: 16px;
+  font-size: 15px;
   color: #020617;
 }
 
