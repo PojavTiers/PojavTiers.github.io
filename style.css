@@ -13,7 +13,7 @@ html, body {
   height: 100%;
 }
 body {
-  background: radial-gradient(circle at top, #0e1420, #05080f 85%);
+  background: radial-gradient(circle at top, #0e1420, #0e1217 85%);
   color: #0e1217;
   font-family: "Poppins", "Inter", system-ui, sans-serif;
   display: flex;
