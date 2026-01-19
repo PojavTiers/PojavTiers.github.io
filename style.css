@@ -35,9 +35,9 @@ body {
 /* ===== ROW ===== */
 .row {
   display: grid;
-  grid-template-columns: 48px 110px 1fr 70px 60px;
+  grid-template-columns: 48px 72px 1fr 70px 60px;
   align-items: center;
-  gap: 12px;
+  overflow: visible;
 
   background: radial-gradient(
     circle at left,
