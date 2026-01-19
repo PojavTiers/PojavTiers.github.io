@@ -35,7 +35,7 @@ players.forEach((p, i) => {
   <div class="rank rank-${i + 1}">${i + 1}</div>
 
   <div class="skin-wrap">
-    <img class="skin" src="https://mc-heads.net/body/${p.name}/left">
+    <img class="skin" src="https://mc-heads.net/body/${p.name}/front">
   </div>
 
   <div class="info">
