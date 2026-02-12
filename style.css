@@ -1,103 +1,69 @@
-const players = [
-  {
-    name: "Marlowww",
-    rank: "Combat Grandmaster",
-    points: 435,
-    region: "NA",
-    skin: "skins/marlowww.png",
-    tiers: {
-      Nethpot: "HT1",
-      Axe: "LT1",
-      Vanilla: "HT2",
-      Sword: "LT2",
-      UHC: "HT3",
-      Mace: "LT3",
-      Pot: "HT4",
-      Smp: "LT4",
-      Bow: "HT5",
-      Crystal: "LT5"
-    }
-  },
-  {
-    name: "Zerium",
-    rank: "Combat Master",
-    points: 330,
-    region: "EU",
-    skin: "skins/zerium.png",
-    tiers: {
-      Nethpot: "HT3",
-      Axe: "LT1",
-      Vanilla: "HT2",
-      Sword: "LT2",
-      UHC: "HT4",
-      Mace: "LT3",
-      Pot: "HT5",
-      Smp: "LT4",
-      Bow: "HT1",
-      Crystal: "LT5"
-    }
-  },
-  {
-    name: "Renix",
-    rank: "Combat Ace",
-    points: 290,
-    region: "AS",
-    skin: "skins/renix.png",
-    tiers: {
-      Nethpot: "LT3",
-      Axe: "HT3",
-      Vanilla: "HT4",
-      Sword: "LT2",
-      UHC: "HT1",
-      Mace: "LT1",
-      Pot: "HT5",
-      Smp: "LT4",
-      Bow: "HT2",
-      Crystal: "LT5"
-    }
-  }
-];
+body {
+    background-color: #121212;
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 20px;
+}
 
-const leaderboard = document.querySelector(".leaderboard");
+#searchBar {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    background: #1e1e1e;
+    border: 1px solid #333;
+    color: white;
+    border-radius: 8px;
+}
 
-players.forEach((player, i) => {
-  const card = document.createElement("div");
-  card.classList.add("player-card", `rank-${i + 1}`);
+.tier-row {
+    display: flex;
+    margin-bottom: 10px;
+    background: #1a1a1a;
+    border-radius: 4px;
+    overflow: hidden;
+}
 
-  const badge = document.createElement("div");
-  badge.classList.add("rank-badge");
-  badge.innerHTML = `<span>${i + 1}</span>`;
+.tier-label {
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #000;
+}
 
-  const skin = document.createElement("img");
-  skin.src = player.skin;
-  skin.alt = `${player.name}'s skin`;
-  skin.classList.add("player-skin");
+/* Tier Colors */
+.tier-S .tier-label { background: #ff7f7f; }
+.tier-A .tier-label { background: #ffbf7f; }
+.tier-B .tier-label { background: #ffff7f; }
 
-  const info = document.createElement("div");
-  info.classList.add("player-info");
-  info.innerHTML = `<h3>${player.name}</h3><p>${player.rank} (${player.points} pts)</p>`;
+.player-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    gap: 15px;
+}
 
-  const region = document.createElement("div");
-  region.classList.add("region-tag", `region-${player.region}`);
-  region.textContent = player.region;
+.player-card {
+    display: flex;
+    align-items: center;
+    background: #252525;
+    padding: 8px 15px;
+    border-radius: 6px;
+    transition: transform 0.2s;
+}
 
-  const tiersRow = document.createElement("div");
-  tiersRow.classList.add("tiers-row");
+.player-card:hover {
+    transform: translateY(-3px);
+    background: #333;
+}
 
-  Object.entries(player.tiers).forEach(([mode, tier]) => {
-    const circle = document.createElement("div");
-    circle.classList.add("tier-circle", `tier-${tier}`);
-    circle.textContent = tier;
-    circle.title = `${mode}: ${tier}`;
-    tiersRow.appendChild(circle);
-  });
+.player-card img {
+    margin-right: 10px;
+    border-radius: 4px;
+}
 
-  info.appendChild(region);
-  info.appendChild(tiersRow);
-
-  card.appendChild(badge);
-  card.appendChild(skin);
-  card.appendChild(info);
-
-  leaderboard.appendChild(card);
-});
+.player-info .name { font-weight: bold; display: block; }
+.player-info .rank { font-size: 0.8rem; color: #aaa; }
