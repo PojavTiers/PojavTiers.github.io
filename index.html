@@ -7,13 +7,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Pojav Tier List</h1>
-        <input type="text" id="searchBar" placeholder="Search player name...">
-    </header>
+    <nav class="navbar">
+        <div class="logo">MCTIERS</div>
+        <input type="text" id="searchBar" placeholder="Search player...">
+    </nav>
 
-    <main id="tierContainer">
-        </main>
+    <div class="main-container">
+        <div class="table-header">
+            <span>#</span>
+            <span>PLAYER</span>
+            <span>REGION</span>
+            <span>TIERS</span>
+        </div>
+        <div id="playerTable">
+            </div>
+    </div>
 
     <script src="players.js"></script>
 </body>
