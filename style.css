@@ -1,69 +1,69 @@
 body {
-    background-color: #121212;
-    color: white;
-    font-family: 'Segoe UI', sans-serif;
+    background-color: #0b0e14;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    padding: 20px;
+    padding: 0;
 }
+
+.navbar {
+    background-color: #14181f;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #23272f;
+}
+
+.logo { font-weight: bold; color: #f1c40f; font-size: 1.2rem; }
 
 #searchBar {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
-    background: #1e1e1e;
+    background: #1a1f29;
     border: 1px solid #333;
     color: white;
-    border-radius: 8px;
-}
-
-.tier-row {
-    display: flex;
-    margin-bottom: 10px;
-    background: #1a1a1a;
+    padding: 8px;
     border-radius: 4px;
-    overflow: hidden;
 }
 
-.tier-label {
-    width: 80px;
-    display: flex;
+.main-container { padding: 20px; }
+
+.table-header, .player-row {
+    display: grid;
+    grid-template-columns: 50px 1fr 100px 200px;
     align-items: center;
-    justify-content: center;
-    font-size: 2rem;
+    padding: 10px 15px;
+    border-bottom: 1px solid #1e2229;
+}
+
+.table-header { color: #888; font-size: 0.8rem; font-weight: bold; }
+
+.player-row:hover { background-color: #14181f; }
+
+.col-player { display: flex; align-items: center; gap: 15px; }
+.player-skin { border-radius: 4px; width: 40px; height: 40px; }
+.player-name { font-weight: bold; color: white; }
+.player-title { font-size: 0.75rem; color: #888; }
+
+.region-tag {
+    background: #5a2a2a;
+    color: #ff9999;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
     font-weight: bold;
-    color: #000;
+}
+
+.col-tiers { display: flex; gap: 5px; }
+.tier-icon {
+    font-size: 0.7rem;
+    padding: 4px;
+    border-radius: 4px;
+    font-weight: bold;
+    width: 25px;
+    text-align: center;
 }
 
 /* Tier Colors */
-.tier-S .tier-label { background: #ff7f7f; }
-.tier-A .tier-label { background: #ffbf7f; }
-.tier-B .tier-label { background: #ffff7f; }
-
-.player-list {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 10px;
-    gap: 15px;
-}
-
-.player-card {
-    display: flex;
-    align-items: center;
-    background: #252525;
-    padding: 8px 15px;
-    border-radius: 6px;
-    transition: transform 0.2s;
-}
-
-.player-card:hover {
-    transform: translateY(-3px);
-    background: #333;
-}
-
-.player-card img {
-    margin-right: 10px;
-    border-radius: 4px;
-}
-
-.player-info .name { font-weight: bold; display: block; }
-.player-info .rank { font-size: 0.8rem; color: #aaa; }
+.HT1 { background: #5a3e10; color: #f1c40f; }
+.LT1 { background: #3d3d3d; color: #fff; }
+.HT3 { background: #3a5a10; color: #a4f10f; }
