@@ -1,147 +1,196 @@
+/* --- MCTIERS REPLICA THEME --- */
+
 :root {
-    --bg-dark: #0f1219;
+    --bg-body: #0b0e14;
+    --bg-nav: #14181f;
     --bg-card: #161b22;
+    --bg-card-hover: #1c222b;
+    --border-color: #30363d;
     --text-main: #ffffff;
     --text-dim: #8b949e;
-    --accent: #f1c40f;
-    --border: #30363d;
+    --accent-gold: #f1c40f;
 }
 
 body {
-    background-color: var(--bg-dark);
+    background-color: var(--bg-body);
     color: var(--text-main);
-    font-family: 'Inter', -apple-system, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     margin: 0;
+    padding: 0;
 }
 
-/* Navbar */
-.top-nav {
+/* Navigation Bar */
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 40px;
-    background: #14181f;
-    border-bottom: 1px solid var(--border);
+    padding: 12px 40px;
+    background-color: var(--bg-nav);
+    border-bottom: 1px solid var(--border-color);
 }
 
-.brand { font-weight: 800; font-size: 20px; color: var(--accent); }
-.brand span { color: white; }
-
-.nav-links a {
-    color: var(--text-dim);
-    text-decoration: none;
-    margin-left: 25px;
-    font-size: 14px;
-    transition: 0.3s;
+.logo {
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: var(--accent-gold);
 }
 
-.nav-links a.active, .nav-links a:hover { color: white; }
-
-.search-container {
-    background: #0d1117;
-    padding: 8px 15px;
-    border-radius: 6px;
-    border: 1px solid var(--border);
-}
+.logo span { color: white; }
 
 #playerSearch {
-    background: transparent;
-    border: none;
+    background: #0d1117;
+    border: 1px solid var(--border-color);
     color: white;
+    padding: 8px 15px;
+    border-radius: 6px;
+    width: 250px;
     outline: none;
-    margin-left: 8px;
 }
 
-/* Category Bar */
-.category-bar {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    padding: 20px;
-    background: #12161d;
+#playerSearch:focus { border-color: var(--accent-gold); }
+
+/* Table Container */
+.table-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
 }
 
-.cat-btn {
-    background: #1c2128;
-    border: 1px solid var(--border);
-    color: var(--text-dim);
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.cat-btn.active {
-    border-color: var(--accent);
-    color: white;
-    background: #252c35;
-}
-
-/* Table Logic */
-.rank-table { max-width: 1100px; margin: 0 auto; padding-bottom: 50px; }
-
-.table-head {
+/* Header Row */
+.table-header {
     display: grid;
-    grid-template-columns: 60px 1fr 100px 350px;
-    padding: 15px;
+    grid-template-columns: 60px 1fr 100px 400px;
+    padding: 10px 20px;
     color: var(--text-dim);
     font-size: 12px;
     font-weight: bold;
+    text-transform: uppercase;
     letter-spacing: 1px;
 }
 
+/* Individual Player Row */
 .player-row {
     display: grid;
-    grid-template-columns: 60px 1fr 100px 350px;
+    grid-template-columns: 60px 1fr 100px 400px;
     align-items: center;
     background: var(--bg-card);
-    margin-bottom: 4px;
-    padding: 12px 15px;
-    border-radius: 4px;
-    transition: 0.2s;
+    margin-bottom: 5px;
+    padding: 12px 20px;
+    border-radius: 6px;
+    transition: background 0.2s ease;
 }
 
-.player-row:hover { background: #1c222b; cursor: pointer; }
+.player-row:hover {
+    background: var(--bg-card-hover);
+}
 
-/* Ranking colors */
-.rank-num { font-style: italic; font-weight: 900; font-size: 1.2rem; }
-.rank-1 { color: #f1c40f; }
-.rank-2 { color: #bdc3c7; }
-.rank-3 { color: #e67e22; }
+/* Rank Number Styling */
+.rank-num {
+    font-style: italic;
+    font-weight: 900;
+    font-size: 18px;
+    color: var(--text-dim);
+}
 
-.player-cell { display: flex; align-items: center; gap: 15px; }
-.p-avatar { width: 42px; height: 42px; border-radius: 4px; border: 1px solid #444; }
-.p-name { font-weight: bold; font-size: 16px; }
-.p-subtitle { font-size: 12px; color: var(--text-dim); display: flex; align-items: center; gap: 5px; }
+.rank-1 { color: #f1c40f; } /* Gold */
+.rank-2 { color: #bdc3c7; } /* Silver */
+.rank-3 { color: #e67e22; } /* Bronze */
 
+/* Player Info Section */
+.player-cell {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.p-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 4px;
+    background: #222;
+}
+
+.player-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.p-name {
+    font-weight: 700;
+    font-size: 16px;
+    color: white;
+}
+
+.p-subtitle {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 2px;
+}
+
+.p-subtitle i {
+    color: var(--accent-gold);
+    margin-right: 4px;
+}
+
+/* Region Tags */
 .region-box {
-    background: #3e2723;
-    color: #ff8a65;
-    padding: 4px 8px;
+    padding: 4px 10px;
     border-radius: 4px;
-    font-weight: 800;
     font-size: 11px;
+    font-weight: 800;
+    text-align: center;
+    width: fit-content;
 }
 
-.region-EU { background: #1b5e20; color: #81c784; }
+.region-NA { background: #4a1e1e; color: #ff8080; }
+.region-EU { background: #1e3a1e; color: #80ff80; }
+.region-AS { background: #1e1e3a; color: #8080ff; }
+.region-SA { background: #3a1e3a; color: #ff80ff; }
 
-/* Tiers */
-.tiers-cell { display: flex; gap: 10px; }
-.tier-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-.tier-item i { font-size: 12px; color: var(--text-dim); }
+/* Tiers Column */
+.tiers-cell {
+    display: flex;
+    gap: 12px;
+}
+
+.tier-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.tier-item i {
+    font-size: 14px;
+    color: var(--text-dim);
+}
+
+/* Tier Rank Tags (HT1, LT1, etc) */
 .tag {
-    padding: 3px 6px;
-    border-radius: 4px;
     font-size: 10px;
     font-weight: 900;
-    min-width: 28px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    min-width: 30px;
     text-align: center;
 }
 
-.HT1 { background: #ffd70033; color: #ffd700; border: 1px solid #ffd70066; }
-.LT1 { background: #ffffff11; color: #ffffff; border: 1px solid #ffffff33; }
-.HT2 { background: #ffaa0033; color: #ffaa00; border: 1px solid #ffaa0066; }
-.LT2 { background: #aaaaaa22; color: #aaaaaa; border: 1px solid #aaaaaa44; }
+/* Replica Colors for Tiers */
+.HT1, .HT2, .HT3 { 
+    background: rgba(241, 196, 15, 0.15); 
+    color: #f1c40f; 
+    border: 1px solid rgba(241, 196, 15, 0.3); 
+}
+
+.LT1, .LT2, .LT3 { 
+    background: rgba(255, 255, 255, 0.05); 
+    color: #ffffff; 
+    border: 1px solid rgba(255, 255, 255, 0.15); 
+}
+
+/* Scrollbar Styling for a clean look */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-body); }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #444; }
