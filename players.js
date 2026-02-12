@@ -1,49 +1,40 @@
-const playerData = [
-    { name: "PlayerOne", tier: "S", rank: "Top 1", region: "NA" },
-    { name: "PojavPro", tier: "A", rank: "Top 10", region: "EU" },
-    { name: "Steve", tier: "B", rank: "High", region: "AS" },
-    // Add more players here
+const players = [
+    { rank: 1, name: "Marlowww", title: "Combat Grandmaster", points: 435, region: "NA", 
+      tiers: { combat: "HT1", vanilla: "HT1", uhc: "LT1", pot: "LT1" } },
+    { rank: 2, name: "ItzRealMe", title: "Combat Master", points: 330, region: "NA", 
+      tiers: { combat: "HT3", vanilla: "HT1", uhc: "HT1", pot: "HT1" } },
+    // Add more players based on your reference image
 ];
 
-const tiers = ["S", "A", "B", "C", "D"];
+function renderTable(filter = "") {
+    const table = document.getElementById('playerTable');
+    table.innerHTML = "";
 
-function renderTiers(filter = "") {
-    const container = document.getElementById('tierContainer');
-    container.innerHTML = ""; // Clear current list
+    const filteredPlayers = players.filter(p => 
+        p.name.toLowerCase().includes(filter.toLowerCase())
+    );
 
-    tiers.forEach(tier => {
-        const tierSection = document.createElement('div');
-        tierSection.className = `tier-row tier-${tier}`;
-        
-        // Filter players by tier and search query
-        const filteredPlayers = playerData.filter(p => 
-            p.tier === tier && p.name.toLowerCase().includes(filter.toLowerCase())
-        );
-
-        if (filteredPlayers.length > 0) {
-            tierSection.innerHTML = `
-                <div class="tier-label">${tier}</div>
-                <div class="player-list">
-                    ${filteredPlayers.map(p => `
-                        <div class="player-card">
-                            <img src="https://mc-heads.net/avatar/${p.name}/50" alt="${p.name}">
-                            <div class="player-info">
-                                <span class="name">${p.name}</span>
-                                <span class="rank">${p.rank}</span>
-                            </div>
-                        </div>
-                    `).join('')}
+    filteredPlayers.forEach(p => {
+        const row = document.createElement('div');
+        row.className = 'player-row';
+        row.innerHTML = `
+            <div class="col-rank">${p.rank}</div>
+            <div class="col-player">
+                <img src="https://mc-heads.net/avatar/${p.name}/40" class="player-skin">
+                <div>
+                    <div class="player-name">${p.name}</div>
+                    <div class="player-title">${p.title} (${p.points} points)</div>
                 </div>
-            `;
-            container.appendChild(tierSection);
-        }
+            </div>
+            <div class="col-region"><span class="region-tag">${p.region}</span></div>
+            <div class="col-tiers">
+                ${Object.values(p.tiers).map(t => `<span class="tier-icon ${t}">${t}</span>`).join('')}
+            </div>
+        `;
+        table.appendChild(row);
     });
 }
 
-// Search functionality
-document.getElementById('searchBar').addEventListener('input', (e) => {
-    renderTiers(e.target.value);
-});
-
-// Initial load
-renderTiers();
+document.getElementById('searchBar').addEventListener('input', (e) => renderTable(e.target.value));
+renderTable();
+              
