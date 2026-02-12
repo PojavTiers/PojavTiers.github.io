@@ -1,40 +1,109 @@
-const players = [
-    { rank: 1, name: "Marlowww", title: "Combat Grandmaster", points: 435, region: "NA", 
-      tiers: { combat: "HT1", vanilla: "HT1", uhc: "LT1", pot: "LT1" } },
-    { rank: 2, name: "ItzRealMe", title: "Combat Master", points: 330, region: "NA", 
-      tiers: { combat: "HT3", vanilla: "HT1", uhc: "HT1", pot: "HT1" } },
-    // Add more players based on your reference image
+const playerData = [
+    {
+        rank: 1,
+        name: "Marlowww",
+        title: "Combat Grandmaster",
+        points: 435,
+        region: "NA",
+        tiers: [
+            { icon: "fa-circle-notch", rank: "HT1" },
+            { icon: "fa-sword", rank: "HT1" },
+            { icon: "fa-gem", rank: "LT1" },
+            { icon: "fa-heart", rank: "LT1" },
+            { icon: "fa-flask", rank: "HT1" },
+            { icon: "fa-eye", rank: "LT1" },
+            { icon: "fa-bolt", rank: "LT1" }
+        ]
+    },
+    {
+        rank: 2,
+        name: "ItzRealMe",
+        title: "Combat Master",
+        points: 330,
+        region: "NA",
+        tiers: [
+            { icon: "fa-sword", rank: "HT3" },
+            { icon: "fa-gem", rank: "HT1" },
+            { icon: "fa-heart", rank: "HT1" },
+            { icon: "fa-flask", rank: "HT1" },
+            { icon: "fa-circle-notch", rank: "LT2" },
+            { icon: "fa-bolt", rank: "LT2" }
+        ]
+    },
+    {
+        rank: 3,
+        name: "Swight",
+        title: "Combat Master",
+        points: 290,
+        region: "NA",
+        tiers: [
+            { icon: "fa-sword", rank: "HT1" },
+            { icon: "fa-heart", rank: "HT1" },
+            { icon: "fa-flask", rank: "HT2" },
+            { icon: "fa-gem", rank: "LT2" }
+        ]
+    },
+    {
+        rank: 4,
+        name: "coldifled",
+        title: "Combat Master",
+        points: 281,
+        region: "EU",
+        tiers: [
+            { icon: "fa-sword", rank: "LT1" },
+            { icon: "fa-gem", rank: "LT1" },
+            { icon: "fa-heart", rank: "HT2" }
+        ]
+    }
 ];
 
-function renderTable(filter = "") {
-    const table = document.getElementById('playerTable');
-    table.innerHTML = "";
+function loadRankings(searchQuery = "") {
+    const container = document.getElementById('playerRows');
+    container.innerHTML = "";
 
-    const filteredPlayers = players.filter(p => 
-        p.name.toLowerCase().includes(filter.toLowerCase())
+    const filtered = playerData.filter(p => 
+        p.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    filteredPlayers.forEach(p => {
+    filtered.forEach(p => {
         const row = document.createElement('div');
         row.className = 'player-row';
+        
+        // Tier badges HTML
+        const tierHTML = p.tiers.map(t => `
+            <div class="tier-item">
+                <i class="fas ${t.icon}"></i>
+                <span class="tag ${t.rank}">${t.rank}</span>
+            </div>
+        `).join('');
+
         row.innerHTML = `
-            <div class="col-rank">${p.rank}</div>
-            <div class="col-player">
-                <img src="https://mc-heads.net/avatar/${p.name}/40" class="player-skin">
+            <div class="rank-num rank-${p.rank}">${p.rank}.</div>
+            <div class="player-cell">
+                <img src="https://mc-heads.net/avatar/${p.name}/100" class="p-avatar">
                 <div>
-                    <div class="player-name">${p.name}</div>
-                    <div class="player-title">${p.title} (${p.points} points)</div>
+                    <div class="p-name">${p.name}</div>
+                    <div class="p-subtitle">
+                        <i class="fas fa-shield-halved" style="color:var(--accent); font-size:10px;"></i>
+                        ${p.title} (${p.points} points)
+                    </div>
                 </div>
             </div>
-            <div class="col-region"><span class="region-tag">${p.region}</span></div>
-            <div class="col-tiers">
-                ${Object.values(p.tiers).map(t => `<span class="tier-icon ${t}">${t}</span>`).join('')}
+            <div class="region-cell">
+                <span class="region-box region-${p.region}">${p.region}</span>
+            </div>
+            <div class="tiers-cell">
+                ${tierHTML}
             </div>
         `;
-        table.appendChild(row);
+        container.appendChild(row);
     });
 }
 
-document.getElementById('searchBar').addEventListener('input', (e) => renderTable(e.target.value));
-renderTable();
-              
+// Event Listeners
+document.getElementById('playerSearch').addEventListener('input', (e) => {
+    loadRankings(e.target.value);
+});
+
+// Initial Load
+window.onload = () => loadRankings();
