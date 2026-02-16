@@ -1,65 +1,51 @@
-function generateTable() {
-    const list = document.getElementById('playerList');
-    const search = document.getElementById('playerSearch').value.toLowerCase();
-    list.innerHTML = "";
+function render() {
+    const container = document.getElementById('list');
+    const query = document.getElementById('search').value.toLowerCase();
+    container.innerHTML = "";
 
-    const fullData = [...UI_CONFIG.players];
-    for (let i = fullData.length + 1; i <= UI_CONFIG.totalRows; i++) {
-        fullData.push({
-            rank: i,
+    const data = [...UI_CONFIG.players];
+    while(data.length < UI_CONFIG.totalRows) {
+        data.push({
+            rank: data.length + 1,
             name: "None",
-            region: i % 2 === 0 ? "EU" : "NA",
-            points: 100 - i,
+            region: "NA",
+            points: 0,
             tiers: ["LT1", "LT1", "LT1", "LT1", "LT1", "LT1", "LT1"]
         });
     }
 
-    const filtered = fullData.filter(p => p.name.toLowerCase().includes(search));
-
-    filtered.forEach(p => {
+    data.filter(p => p.name.toLowerCase().includes(query)).forEach(p => {
         const row = document.createElement('div');
         row.className = `p-row rank-${p.rank}`;
         
-        const tierHTML = p.tiers.map((t, idx) => `
+        const tiers = p.tiers.map((t, i) => `
             <div class="t-unit">
-                <i class="fas ${UI_CONFIG.categories[idx].icon}"></i>
+                <i class="fas ${UI_CONFIG.categories[i].icon}"></i>
                 <span class="tag ${t}">${t}</span>
             </div>
         `).join('');
 
-        const skinImg = `${UI_CONFIG.renderUrl}${p.name}${UI_CONFIG.renderParams}`;
+        const skin = `${UI_CONFIG.renderUrl}${p.name}${UI_CONFIG.renderParams}`;
 
         row.innerHTML = `
-            <div class="r-num">${p.rank}.</div>
-            <div class="p-identity">
-                <div class="skin-3d-wrap">
-                    <img src="${skinImg}" class="skin-3d" onerror="this.src='https://render.crafthead.net/renders/body/Steve${UI_CONFIG.renderParams}'">
+            <div style="font-weight: 800; color: var(--text-dim);">${p.rank}.</div>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <div class="skin-box">
+                    <img src="${skin}" class="skin-3d" onerror="this.src='https://render.crafthead.net/renders/body/Steve${UI_CONFIG.renderParams}'">
                 </div>
-                <div class="p-info">
-                    <span class="p-name">${p.name}</span>
-                    <span class="p-sub"><i class="fas fa-shield-halved"></i> Combat Master (${p.points} pts)</span>
+                <div>
+                    <div style="font-weight: 700;">${p.name}</div>
+                    <div style="font-size: 12px; color: var(--text-dim);">${p.points} points</div>
                 </div>
             </div>
-            <div><span class="reg-tag ${p.region}">${p.region}</span></div>
-            <div class="tier-container">${tierHTML}</div>
+            <div style="font-weight: 700; color: #ff5555;">${p.region}</div>
+            <div class="tier-container">${tiers}</div>
         `;
-        list.appendChild(row);
-    });
-}
-
-function initCategories() {
-    const catList = document.getElementById('categoryList');
-    UI_CONFIG.categories.forEach(c => {
-        const btn = document.createElement('button');
-        btn.className = `cat-btn ${c.id === 'overall' ? 'active' : ''}`;
-        btn.innerHTML = `<i class="fas ${c.icon}"></i> ${c.label}`;
-        catList.appendChild(btn);
+        container.appendChild(row);
     });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    initCategories();
-    generateTable();
-    document.getElementById('playerSearch').addEventListener('input', generateTable);
+    render();
+    document.getElementById('search').addEventListener('input', render);
 });
-
