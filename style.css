@@ -1,303 +1,148 @@
-/* * =================================================================
- * POJAV TIERS - PREMIUM CSS ENGINE (v3.0)
- * REPLICA OF MCTIERS.COM
- * =================================================================
- */
-
-/* --- 1. CORE VARIABLES --- */
 :root {
-    /* Backgrounds */
-    --bg-deep: #0b0e14;
-    --bg-secondary: #14181f;
+    --bg-dark: #0b0e14;
+    --bg-nav: #14181f;
     --bg-card: #161b22;
-    --bg-card-hover: #1c222b;
-    --bg-search: #0d1117;
-    
-    /* Text & UI Colors */
-    --text-white: #ffffff;
-    --text-gray: #8b949e;
-    --text-dark: #555555;
-    --accent-gold: #f1c40f;
-    --border-main: #30363d;
-    
-    /* Column Widths - Hardcoded for perfect alignment */
-    --w-rank: 60px;
-    --w-player: 1fr;
-    --w-region: 100px;
-    --w-tiers: 480px;
+    --bg-hover: #1c222b;
+    --gold: #f1c40f;
+    --border: #30363d;
+    --text-dim: #8b949e;
+    --col-rank: 60px;
+    --col-player: 1fr;
+    --col-region: 100px;
+    --col-tiers: 460px;
 }
 
-/* --- 2. GLOBAL RESET --- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-}
-
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-    background-color: var(--bg-deep);
-    color: var(--text-white);
-    font-family: 'Inter', -apple-system, sans-serif;
-    overflow-x: hidden;
-    line-height: 1.4;
+    background-color: var(--bg-dark);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    overflow-y: scroll;
 }
 
-/* --- 3. SCROLLBAR --- */
-::-webkit-scrollbar {
-    width: 8px;
-}
-::-webkit-scrollbar-track {
-    background: var(--bg-deep);
-}
-::-webkit-scrollbar-thumb {
-    background: #30363d;
-    border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #444;
-}
-
-/* --- 4. NAVIGATION --- */
 .navbar {
-    background-color: var(--bg-secondary);
-    border-bottom: 1px solid var(--border-main);
+    background: var(--bg-nav);
+    border-bottom: 1px solid var(--border);
     padding: 12px 0;
     position: sticky;
     top: 0;
     z-index: 100;
 }
 
-.nav-wrap {
-    max-width: 1400px;
+.nav-container {
+    max-width: 1300px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 0 30px;
+    padding: 0 20px;
 }
 
-.logo {
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--accent-gold);
-    letter-spacing: -0.5px;
-}
-
+.logo { font-weight: 800; font-size: 22px; color: var(--gold); margin-right: 40px; }
 .logo span { color: white; }
 
-.search-bar {
-    background: var(--bg-search);
-    border: 1px solid var(--border-main);
+.search-box {
+    background: #0d1117;
+    border: 1px solid var(--border);
     border-radius: 6px;
+    padding: 8px 15px;
     display: flex;
     align-items: center;
-    padding: 8px 14px;
-    width: 320px;
+    width: 300px;
 }
 
-.search-bar i {
-    color: var(--text-gray);
-    margin-right: 10px;
-    font-size: 14px;
-}
-
-#playerSearch {
+.search-box input {
     background: transparent;
     border: none;
     color: white;
-    width: 100%;
+    margin-left: 10px;
     outline: none;
-    font-size: 14px;
+    width: 100%;
 }
 
-/* --- 5. CATEGORY TABS --- */
-.category-strip {
-    background-color: #12161d;
-    border-bottom: 1px solid var(--border-main);
-}
+.nav-links { margin-left: auto; display: flex; gap: 20px; }
+.nav-item { color: var(--text-dim); text-decoration: none; font-size: 14px; font-weight: 600; }
+.nav-item.active { color: white; }
 
-.cat-wrap {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 15px 30px;
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-}
-
+.category-bar { background: #12161d; border-bottom: 1px solid var(--border); }
+.cat-inner { max-width: 1300px; margin: 0 auto; display: flex; padding: 15px 20px; gap: 10px; }
 .cat-btn {
     background: #1c2128;
-    color: var(--text-gray);
-    border: 1px solid var(--border-main);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
     padding: 8px 16px;
     border-radius: 6px;
     cursor: pointer;
     font-size: 13px;
-    font-weight: 600;
     display: flex;
     align-items: center;
     gap: 8px;
-    transition: 0.2s;
-    white-space: nowrap;
 }
+.cat-btn.active { border-color: var(--gold); color: white; background: #252c35; }
 
-.cat-btn.active, .cat-btn:hover {
-    background: #252c35;
-    color: white;
-    border-color: var(--accent-gold);
-}
-
-.cat-btn i { font-size: 12px; }
-
-/* --- 6. RANKING TABLE --- */
-.ranking-container {
-    max-width: 1400px;
-    margin: 25px auto;
-    padding: 0 30px;
-}
-
-.table-head, .player-row {
+.content-wrapper { max-width: 1300px; margin: 20px auto; padding: 0 20px; }
+.table-header, .p-row {
     display: grid;
-    grid-template-columns: var(--w-rank) var(--w-player) var(--w-region) var(--w-tiers);
+    grid-template-columns: var(--col-rank) var(--col-player) var(--col-region) var(--col-tiers);
+    padding: 12px 20px;
     align-items: center;
-    padding: 14px 20px;
 }
 
-.table-head {
-    color: var(--text-gray);
-    font-weight: 700;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
+.table-header { color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; }
 
-.player-row {
-    background-color: var(--bg-card);
-    margin-bottom: 5px;
+.p-row {
+    background: var(--bg-card);
+    margin-bottom: 6px;
     border-radius: 8px;
     border: 1px solid transparent;
-    transition: 0.15s ease-in-out;
+    transition: 0.2s;
 }
+.p-row:hover { background: var(--bg-hover); border-color: #444; transform: translateY(-1px); }
 
-.player-row:hover {
-    background-color: var(--bg-card-hover);
-    border-color: #444;
-    transform: translateY(-1px);
-}
+.r-num { font-weight: 900; font-style: italic; font-size: 18px; color: #444; }
+.rank-1 .r-num { color: var(--gold); }
+.rank-2 .r-num { color: #bdc3c7; }
+.rank-3 .r-num { color: #e67e22; }
 
-/* --- 7. PLAYER CONTENT --- */
-.rank-box {
-    font-weight: 900;
-    font-style: italic;
-    font-size: 17px;
-    color: var(--text-dark);
-}
-
-/* Gold/Silver/Bronze Logic */
-.rank-1 .rank-box { color: #f1c40f; }
-.rank-2 .rank-box { color: #bdc3c7; }
-.rank-3 .rank-box { color: #e67e22; }
-
-.player-box {
+.p-identity { display: flex; align-items: center; gap: 20px; }
+.skin-3d-wrap {
+    width: 50px;
+    height: 65px;
     display: flex;
     align-items: center;
-    gap: 15px;
+    justify-content: center;
 }
-
-.player-head {
-    width: 44px;
-    height: 44px;
-    border-radius: 4px;
-    background-color: #222;
+.skin-3d { 
+    height: 100%; 
+    filter: drop-shadow(0 4px 4px rgba(0,0,0,0.5));
+    transition: transform 0.3s;
 }
+.p-row:hover .skin-3d { transform: scale(1.1) rotate(-5deg); }
 
-.player-details {
-    display: flex;
-    flex-direction: column;
-}
+.p-info { display: flex; flex-direction: column; }
+.p-name { font-weight: 700; font-size: 16px; }
+.p-sub { color: var(--text-dim); font-size: 12px; margin-top: 3px; }
 
-.p-name {
-    font-weight: 700;
-    font-size: 16px;
-    color: white;
-}
-
-.p-stats {
-    font-size: 12px;
-    color: var(--text-gray);
-    margin-top: 2px;
-}
-
-.p-stats i {
-    color: var(--accent-gold);
-    margin-right: 4px;
-    font-size: 10px;
-}
-
-/* --- 8. REGION TAGS --- */
-.region-tag {
+.reg-tag {
     font-size: 11px;
     font-weight: 800;
-    padding: 4px 10px;
+    padding: 4px 8px;
     border-radius: 4px;
-    text-align: center;
-    width: 42px;
+    background: #252a33;
 }
+.NA { color: #ff8080; }
+.EU { color: #80ff80; }
 
-.region-NA { background: #4a1e1e; color: #ff8080; }
-.region-EU { background: #1e3a1e; color: #80ff80; }
-.region-AS { background: #1e1e3a; color: #8080ff; }
-.region-OC { background: #3a1e3a; color: #ff80ff; }
-
-/* --- 9. TIERS SYSTEM --- */
-.tiers-box {
-    display: flex;
-    gap: 12px;
-}
-
-.tier-group {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-}
-
-.tier-group i {
-    font-size: 14px;
-    color: var(--text-gray);
-    opacity: 0.7;
-}
-
-.badge {
+.tier-container { display: flex; gap: 12px; justify-content: flex-end; }
+.t-unit { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.t-unit i { font-size: 13px; color: var(--text-dim); }
+.tag {
     font-size: 10px;
     font-weight: 900;
     padding: 2px 6px;
     border-radius: 3px;
-    min-width: 32px;
+    min-width: 34px;
     text-align: center;
 }
-
-/* Badge Tones */
-.HT1, .HT2, .HT3 {
-    background: rgba(241, 196, 15, 0.15);
-    color: #f1c40f;
-    border: 1px solid rgba(241, 196, 15, 0.3);
-}
-
-.LT1, .LT2, .LT3, .LT4 {
-    background: rgba(255, 255, 255, 0.05);
-    color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-/* --- 10. ANIMATIONS --- */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-#playerRows .player-row {
-    animation: fadeIn 0.4s ease forwards;
-    }
+.HT1 { background: rgba(241, 196, 15, 0.15); color: var(--gold); border: 1px solid rgba(241, 196, 15, 0.3); }
+.LT1 { background: rgba(255, 255, 255, 0.05); color: white; border: 1px solid rgba(255, 255, 255, 0.15); }
         
