@@ -1,101 +1,105 @@
-/**
+/* * =================================================================
+ * POJAV TIERS - PREMIUM CSS ENGINE (v3.0)
+ * REPLICA OF MCTIERS.COM
  * =================================================================
- * POJAV TIERS - STYLE ENGINE (REPLICA v2.0)
- * =================================================================
- * This stylesheet controls the visual presentation, color palette,
- * grid layouts, and interactive hover states for the ranking site.
  */
 
-/* --- 1. FONTS & ROOT VARIABLES --- */
+/* --- 1. CORE VARIABLES --- */
 :root {
-    /* Color Palette - Precise MCTiers Dark Theme */
-    --bg-body: #0b0e14;
-    --bg-nav: #14181f;
+    /* Backgrounds */
+    --bg-deep: #0b0e14;
+    --bg-secondary: #14181f;
     --bg-card: #161b22;
     --bg-card-hover: #1c222b;
     --bg-search: #0d1117;
     
-    /* Text Colors */
-    --text-main: #ffffff;
-    --text-dim: #8b949e;
-    --text-muted: #555555;
-    
-    /* Accents */
+    /* Text & UI Colors */
+    --text-white: #ffffff;
+    --text-gray: #8b949e;
+    --text-dark: #555555;
     --accent-gold: #f1c40f;
-    --accent-gold-alpha: rgba(241, 196, 15, 0.15);
-    --accent-gold-border: rgba(241, 196, 15, 0.4);
+    --border-main: #30363d;
     
-    /* Borders & Spacing */
-    --border-color: #30363d;
-    --border-row-hover: #444444;
-    --row-padding: 12px 20px;
-    --grid-columns: 60px 1fr 120px 450px; /* Precise column widths */
+    /* Column Widths - Hardcoded for perfect alignment */
+    --w-rank: 60px;
+    --w-player: 1fr;
+    --w-region: 100px;
+    --w-tiers: 480px;
 }
 
-/* --- 2. RESET & BASE STYLES --- */
+/* --- 2. GLOBAL RESET --- */
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
 }
 
 body {
-    background-color: var(--bg-body);
-    color: var(--text-main);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    line-height: 1.5;
-    overflow-y: scroll; /* Keep scrollbar visible for layout stability */
+    background-color: var(--bg-deep);
+    color: var(--text-white);
+    font-family: 'Inter', -apple-system, sans-serif;
+    overflow-x: hidden;
+    line-height: 1.4;
 }
 
-/* --- 3. NAVBAR & SEARCH --- */
+/* --- 3. SCROLLBAR --- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-deep);
+}
+::-webkit-scrollbar-thumb {
+    background: #30363d;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #444;
+}
+
+/* --- 4. NAVIGATION --- */
 .navbar {
-    background-color: var(--bg-nav);
-    border-bottom: 1px solid var(--border-color);
-    padding: 10px 0;
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-main);
+    padding: 12px 0;
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 100;
 }
 
-.nav-content {
+.nav-wrap {
     max-width: 1400px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 30px;
 }
 
 .logo {
+    font-size: 20px;
     font-weight: 800;
-    font-size: 22px;
-    letter-spacing: 0.5px;
     color: var(--accent-gold);
+    letter-spacing: -0.5px;
 }
 
-.logo span {
-    color: white;
-    font-weight: 400;
-}
+.logo span { color: white; }
 
-.search-wrapper {
+.search-bar {
     background: var(--bg-search);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border-main);
     border-radius: 6px;
-    padding: 8px 15px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    padding: 8px 14px;
     width: 320px;
-    transition: border-color 0.2s;
 }
 
-.search-wrapper:focus-within {
-    border-color: var(--accent-gold);
-}
-
-.search-wrapper i {
-    color: var(--text-dim);
+.search-bar i {
+    color: var(--text-gray);
+    margin-right: 10px;
+    font-size: 14px;
 }
 
 #playerSearch {
@@ -107,47 +111,35 @@ body {
     font-size: 14px;
 }
 
-.btn-primary {
-    background: var(--bg-card);
-    color: white;
-    border: 1px solid var(--border-color);
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.btn-primary:hover {
-    background: var(--bg-card-hover);
-}
-
-/* --- 4. CATEGORY BAR --- */
-.category-bar {
+/* --- 5. CATEGORY TABS --- */
+.category-strip {
     background-color: #12161d;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-main);
 }
 
-.cat-content {
+.cat-wrap {
     max-width: 1400px;
     margin: 0 auto;
+    padding: 15px 30px;
     display: flex;
-    padding: 15px 20px;
-    gap: 10px;
+    gap: 8px;
+    overflow-x: auto;
 }
 
 .cat-btn {
     background: #1c2128;
-    color: var(--text-dim);
-    border: 1px solid var(--border-color);
+    color: var(--text-gray);
+    border: 1px solid var(--border-main);
     padding: 8px 16px;
     border-radius: 6px;
     cursor: pointer;
     font-size: 13px;
-    transition: all 0.2s;
+    font-weight: 600;
     display: flex;
     align-items: center;
     gap: 8px;
+    transition: 0.2s;
+    white-space: nowrap;
 }
 
 .cat-btn.active, .cat-btn:hover {
@@ -156,84 +148,71 @@ body {
     border-color: var(--accent-gold);
 }
 
-/* --- 5. TABLE LAYOUT --- */
-.table-container {
+.cat-btn i { font-size: 12px; }
+
+/* --- 6. RANKING TABLE --- */
+.ranking-container {
     max-width: 1400px;
-    margin: 20px auto;
-    padding: 0 20px;
+    margin: 25px auto;
+    padding: 0 30px;
 }
 
-.table-header, .player-row {
+.table-head, .player-row {
     display: grid;
-    grid-template-columns: var(--grid-columns);
+    grid-template-columns: var(--w-rank) var(--w-player) var(--w-region) var(--w-tiers);
     align-items: center;
-    padding: var(--row-padding);
+    padding: 14px 20px;
 }
 
-/* Table Header Specifics */
-.table-header {
-    color: var(--text-dim);
-    font-weight: bold;
+.table-head {
+    color: var(--text-gray);
+    font-weight: 700;
+    font-size: 11px;
     text-transform: uppercase;
-    font-size: 12px;
     letter-spacing: 1px;
 }
 
-/* Player Row Container */
 .player-row {
     background-color: var(--bg-card);
-    margin-bottom: 6px;
+    margin-bottom: 5px;
     border-radius: 8px;
-    transition: all 0.2s ease;
     border: 1px solid transparent;
+    transition: 0.15s ease-in-out;
 }
 
 .player-row:hover {
     background-color: var(--bg-card-hover);
-    border-color: var(--border-row-hover);
+    border-color: #444;
     transform: translateY(-1px);
 }
 
-/* --- 6. TABLE CONTENT STYLING --- */
-
-/* Column: Rank Number */
-.col-rank {
-    font-size: 18px;
-    font-weight: 800;
+/* --- 7. PLAYER CONTENT --- */
+.rank-box {
+    font-weight: 900;
     font-style: italic;
-    color: var(--text-muted);
+    font-size: 17px;
+    color: var(--text-dark);
 }
 
-/* Special styling for top 3 */
-.rank-special .col-rank {
-    font-size: 20px;
-}
-.rank-1 .col-rank { color: var(--accent-gold); }
-.rank-2 .col-rank { color: #bdc3c7; }
-.rank-3 .col-rank { color: #e67e22; }
+/* Gold/Silver/Bronze Logic */
+.rank-1 .rank-box { color: #f1c40f; }
+.rank-2 .rank-box { color: #bdc3c7; }
+.rank-3 .rank-box { color: #e67e22; }
 
-/* Column: Player Info */
-.col-player {
+.player-box {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.avatar-wrapper {
-    position: relative;
-    width: 45px;
-    height: 45px;
-}
-
-.p-avatar {
-    width: 100%;
-    height: 100%;
+.player-head {
+    width: 44px;
+    height: 44px;
     border-radius: 4px;
-    background: #222;
-    object-fit: cover;
+    background-color: #222;
 }
 
-.player-info {
+.player-details {
     display: flex;
     flex-direction: column;
 }
@@ -244,97 +223,81 @@ body {
     color: white;
 }
 
-.p-subtitle {
-    color: var(--text-dim);
+.p-stats {
     font-size: 12px;
+    color: var(--text-gray);
     margin-top: 2px;
-    display: flex;
-    align-items: center;
 }
 
-.p-subtitle i {
+.p-stats i {
     color: var(--accent-gold);
-    margin-right: 5px;
+    margin-right: 4px;
     font-size: 10px;
 }
 
-/* Column: Region Tag */
-.col-region {
-    display: flex;
-}
-
-.region-box {
-    background: #252a33;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-weight: 800;
+/* --- 8. REGION TAGS --- */
+.region-tag {
     font-size: 11px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 4px;
     text-align: center;
-    width: 40px;
-    text-transform: uppercase;
+    width: 42px;
 }
 
-/* Region Specific Colors */
-.region-NA { color: #ff8080; }
-.region-EU { color: #80ff80; }
-.region-AS { color: #8080ff; }
+.region-NA { background: #4a1e1e; color: #ff8080; }
+.region-EU { background: #1e3a1e; color: #80ff80; }
+.region-AS { background: #1e1e3a; color: #8080ff; }
+.region-OC { background: #3a1e3a; color: #ff80ff; }
 
-/* Column: Tiers (HT1/LT1) */
-.col-tiers {
+/* --- 9. TIERS SYSTEM --- */
+.tiers-box {
     display: flex;
     gap: 12px;
-    justify-content: flex-start;
 }
 
-.tier-item {
+.tier-group {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
 }
 
-.tier-item i {
+.tier-group i {
     font-size: 14px;
-    color: var(--text-dim);
+    color: var(--text-gray);
+    opacity: 0.7;
 }
 
-.tag {
+.badge {
     font-size: 10px;
     font-weight: 900;
-    padding: 3px 6px;
-    border-radius: 4px;
+    padding: 2px 6px;
+    border-radius: 3px;
     min-width: 32px;
     text-align: center;
-    text-transform: uppercase;
 }
 
-/* Tier Colors - Premium Replica */
+/* Badge Tones */
 .HT1, .HT2, .HT3 {
-    background: var(--accent-gold-alpha);
-    color: var(--accent-gold);
-    border: 1px solid var(--accent-gold-border);
+    background: rgba(241, 196, 15, 0.15);
+    color: #f1c40f;
+    border: 1px solid rgba(241, 196, 15, 0.3);
 }
 
-.LT1, .LT2, .LT3 {
+.LT1, .LT2, .LT3, .LT4 {
     background: rgba(255, 255, 255, 0.05);
     color: #ffffff;
     border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* --- 7. UTILITIES & SCROLLBAR --- */
-::-webkit-scrollbar {
-    width: 10px;
+/* --- 10. ANIMATIONS --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-::-webkit-scrollbar-track {
-    background: var(--bg-body);
-}
-
-::-webkit-scrollbar-thumb {
-    background: #2a2f3a;
-    border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #3a3f4a;
-               }
+#playerRows .player-row {
+    animation: fadeIn 0.4s ease forwards;
+    }
+        
