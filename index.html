@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PojavTiers | Official Rankings</title>
+    <title>PojavTiers | Rankings</title>
     
     <link rel="stylesheet" href="style.css">
     
@@ -14,24 +14,22 @@
 <body>
 
     <nav class="navbar">
-        <div class="nav-content">
+        <div class="nav-wrap">
             <div class="logo">POJAV<span>TIERS</span></div>
             
-            <div class="search-wrapper">
+            <div class="search-bar">
                 <i class="fas fa-search"></i>
                 <input type="text" id="playerSearch" placeholder="Search player name...">
             </div>
             
             <div class="nav-right">
-                <button class="btn-primary">
-                    <i class="fab fa-discord"></i> Discord
-                </button>
+                <button class="btn-primary">Discord</button>
             </div>
         </div>
     </nav>
 
-    <div class="category-bar">
-        <div class="cat-content">
+    <div class="category-strip">
+        <div class="cat-wrap">
             <button class="cat-btn active" data-cat="overall">
                 <i class="fas fa-circle-notch"></i> Overall
             </button>
@@ -56,8 +54,8 @@
         </div>
     </div>
 
-    <main class="table-container">
-        <div class="table-header">
+    <main class="ranking-container">
+        <div class="table-head">
             <div class="col-rank">#</div>
             <div class="col-player">PLAYER</div>
             <div class="col-region">REGION</div>
