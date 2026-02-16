@@ -1,7 +1,8 @@
-const UI_CONFIG = {
+const CONFIG = {
     totalRows: 100,
-    renderUrl: "https://crafatar.com/renders/body/",
-    renderParams: "?overlay&scale=3",
+    // Using Minotar for maximum stability and no-flicker loading
+    renderUrl: "https://minotar.net/armor/body/",
+    fallbackSkin: "https://minotar.net/armor/body/MHF_Steve/100.png",
     categories: [
         { id: "overall", icon: "fa-circle-notch" },
         { id: "ltms", icon: "fa-sword" },
@@ -23,8 +24,8 @@ function render() {
     const search = document.getElementById('search').value.toLowerCase();
     list.innerHTML = "";
 
-    const data = [...UI_CONFIG.players];
-    while(data.length < UI_CONFIG.totalRows) {
+    const data = [...CONFIG.players];
+    while(data.length < CONFIG.totalRows) {
         data.push({
             rank: data.length + 1,
             name: "Steve",
@@ -38,30 +39,34 @@ function render() {
         const row = document.createElement('div');
         row.className = `p-row rank-${p.rank}`;
         
-        const tiers = p.tiers.map((t, i) => `
-            <div class="t-unit" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; height: 100%;">
-                <i class="fas ${UI_CONFIG.categories[i].icon}" style="font-size: 12px; color: #8b949e;"></i>
+        // Vertical centering logic for tiers
+        const tierHTML = p.tiers.map((t, i) => `
+            <div class="t-unit" style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 45px; width: 40px;">
+                <i class="fas ${CONFIG.categories[i].icon}" style="font-size: 11px; color: #8b949e; margin-bottom: 5px;"></i>
                 <span class="tag ${t}">${t}</span>
             </div>
         `).join('');
 
-        const skin = `${UI_CONFIG.renderUrl}${p.name}${UI_CONFIG.renderParams}`;
+        const skinSrc = `${CONFIG.renderUrl}${p.name}/100.png`;
 
         row.innerHTML = `
-            <div style="font-weight: 800; color: #555;">${p.rank}.</div>
-            <div style="display: flex; align-items: center; gap: 15px;">
-                <div style="width: 50px; height: 75px; display: flex; align-items: center; justify-content: center;">
-                    <img src="${skin}" style="max-height: 100%; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));" 
-                         onerror="this.src='https://crafatar.com/renders/body/8667ba71-b85a-4004-af54-457a9734eed7${UI_CONFIG.renderParams}'">
+            <div style="font-weight: 900; color: #333; font-style: italic;">${p.rank}.</div>
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <div style="width: 50px; height: 80px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                    <img src="${skinSrc}" 
+                         style="height: 100%; width: auto; object-fit: contain;" 
+                         onerror="this.onerror=null; this.src='${CONFIG.fallbackSkin}';">
                 </div>
-                <div style="display: flex; flex-direction: column;">
-                    <span style="font-weight: 700; font-size: 15px;">${p.name}</span>
-                    <span style="font-size: 11px; color: #8b949e;"><i class="fas fa-shield-halved" style="color: #f1c40f;"></i> Combat Master (${p.points})</span>
+                <div style="display: flex; flex-direction: column; justify-content: center;">
+                    <span style="font-weight: 700; font-size: 16px; letter-spacing: -0.3px;">${p.name}</span>
+                    <span style="font-size: 12px; color: #8b949e; margin-top: 2px;">
+                        <i class="fas fa-shield-halved" style="color: #f1c40f; font-size: 10px;"></i> Master (${p.points})
+                    </span>
                 </div>
             </div>
             <div style="font-weight: 800; font-size: 11px; color: #ff8080;">${p.region}</div>
-            <div class="tier-container" style="display: flex; gap: 12px; justify-content: flex-end; align-items: center;">
-                ${tiers}
+            <div class="tier-container" style="display: flex; gap: 10px; justify-content: flex-end; align-items: center; height: 100%;">
+                ${tierHTML}
             </div>
         `;
         list.appendChild(row);
