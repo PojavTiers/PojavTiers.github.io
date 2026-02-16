@@ -1,154 +1,148 @@
-/**
- * =================================================================
- * POJAV TIERS - ADVANCED DATA MANAGER (v3.0)
- * =================================================================
- * This file contains hard-coded player data to ensure consistency.
- * It also handles searching, filtering, and HTML rendering.
- */
-
-// --- 1. CONFIGURATION ---
-const TOTAL_PLAYERS = 100;
-
-// --- 2. THE MASTER DATABASE (Hard-coded for Stability) ---
-// Add real player names and data here to make them appear in the list.
-const playersDatabase = [
-    { rank: 1, name: "Marlowww", title: "Combat Grandmaster", points: 435, region: "NA", tiers: ["HT1", "HT1", "LT1", "LT1", "HT1", "LT1", "LT1"] },
-    { rank: 2, name: "ItzRealMe", title: "Combat Master", points: 330, region: "NA", tiers: ["HT3", "HT1", "HT1", "HT1", "LT2", "LT2", "LT2"] },
-    { rank: 3, name: "Swight", title: "Combat Master", points: 290, region: "NA", tiers: ["HT1", "HT2", "LT2", "LT2", "HT3", "HT1", "LT2"] },
-    { rank: 4, name: "coldifled", title: "Combat Master", points: 281, region: "EU", tiers: ["LT1", "LT1", "HT2", "LT1", "LT1", "HT3", "HT1"] },
-    { rank: 5, name: "Janekv", title: "Combat Ace", points: 230, region: "EU", tiers: ["LT2", "LT2", "HT3", "LT3", "LT3", "HT4", "HT1"] },
-    { rank: 6, name: "BlvckWlf", title: "Combat Ace", points: 226, region: "EU", tiers: ["LT2", "HT3", "LT3", "LT3", "HT1", "HT1", "LT2"] },
-    { rank: 7, name: "Kylaz", title: "Combat Ace", points: 226, region: "NA", tiers: ["HT1", "HT1", "LT1", "LT1", "HT1", "LT1", "LT1"] },
-    { rank: 8, name: "ninorc15", title: "Combat Ace", points: 191, region: "EU", tiers: ["HT2", "LT2", "LT2", "LT2", "HT2", "LT3", "LT2"] },
-    { rank: 9, name: "Lurrn", title: "Combat Ace", points: 186, region: "EU", tiers: ["LT3", "LT4", "HT1", "HT1", "HT2", "LT2", "LT2"] },
-    { rank: 10, name: "yMiau", title: "Combat Ace", points: 177, region: "EU", tiers: ["LT1", "LT1", "HT2", "LT1", "LT1", "HT3", "HT1"] },
-    { rank: 10, name: "Arsakha", title: "Combat Ace", points: 177, region: "AS", tiers: ["HT2", "LT2", "LT2", "HT3", "HT3", "LT3", "HT1"] },
-    { rank: 12, name: "Juan_Clean", title: "Combat Ace", points: 165, region: "NA", tiers: ["HT3", "LT3", "LT3", "LT3", "HT1", "LT1", "LT1"] },
-    { rank: 12, name: "Deivi_17", title: "Combat Ace", points: 165, region: "EU", tiers: ["LT3", "LT4", "HT4", "LT4", "HT1", "LT1", "LT2"] },
-    { rank: 14, name: "Spawnplayer", title: "Combat Ace", points: 152, region: "NA", tiers: ["HT3", "LT3", "LT3", "LT3", "HT3", "LT2", "LT2"] },
-    { rank: 15, name: "Frxnkey", title: "Combat Ace", points: 143, region: "NA", tiers: ["LT3", "LT3", "HT4", "LT3", "HT1", "HT2", "HT2"] },
-    { rank: 16, name: "Hosthan", title: "Combat Ace", points: 142, region: "EU", tiers: ["LT3", "LT3", "LT2", "LT2", "HT2", "LT2", "LT2"] },
-];
-
-// --- 3. CATEGORY ICONS (Mapped to CSS) ---
-const categoryIcons = [
-    "fa-circle-notch", // Overall
-    "fa-sword",        // LTMs
-    "fa-gem",          // Vanilla
-    "fa-heart",        // UHC
-    "fa-flask",        // Pot
-    "fa-eye",          // NethOP
-    "fa-bolt"          // SMP
-];
-
-// --- 4. DATA GENERATOR (Fill remaining 100 slots) ---
-function generateFullDataset() {
-    let dataset = [...playersDatabase];
-
-    // If database has more than 100, truncate it
-    if (dataset.length > TOTAL_PLAYERS) {
-        return dataset.slice(0, TOTAL_PLAYERS);
-    }
-
-    // Fill remaining slots with "None"
-    for (let i = dataset.length + 1; i <= TOTAL_PLAYERS; i++) {
-        dataset.push({
-            rank: i,
-            name: "None",
-            title: "Combatant",
-            points: Math.max(0, 100 - (i * 1)),
-            region: i % 3 === 0 ? "EU" : "NA",
-            tiers: ["LT2", "LT3", "LT2", "LT2", "HT2", "LT2", "LT2"]
-        });
-    }
-    return dataset;
+:root {
+    --bg-dark: #0b0e14;
+    --bg-nav: #14181f;
+    --bg-card: #161b22;
+    --bg-hover: #1c222b;
+    --gold: #f1c40f;
+    --border: #30363d;
+    --text-dim: #8b949e;
+    --col-rank: 60px;
+    --col-player: 1fr;
+    --col-region: 100px;
+    --col-tiers: 460px;
 }
 
-const finalDataset = generateFullDataset();
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    background-color: var(--bg-dark);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    overflow-y: scroll;
+}
 
-// --- 5. RENDER ENGINE ---
-const Renderer = {
-    // Generate tier icons and badges
-    renderTiers: function(tierArray) {
-        return tierArray.map((tier, index) => {
-            const icon = categoryIcons[index] || "fa-circle";
-            return `
-                <div class="tier-group">
-                    <i class="fas ${icon}"></i>
-                    <span class="badge ${tier}">${tier}</span>
-                </div>
-            `;
-        }).join('');
-    },
+.navbar {
+    background: var(--bg-nav);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
 
-    // Create the full row HTML
-    createRow: function(player) {
-        const rankClass = `rank-${player.rank}`;
-        const regionClass = `region-${player.region}`;
+.nav-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo { font-weight: 800; font-size: 22px; color: var(--gold); margin-right: 40px; }
+.logo span { color: white; }
+
+.search-box {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    width: 300px;
+}
+
+.search-box input {
+    background: transparent;
+    border: none;
+    color: white;
+    margin-left: 10px;
+    outline: none;
+    width: 100%;
+}
+
+.nav-links { margin-left: auto; display: flex; gap: 20px; }
+.nav-item { color: var(--text-dim); text-decoration: none; font-size: 14px; font-weight: 600; }
+.nav-item.active { color: white; }
+
+.category-bar { background: #12161d; border-bottom: 1px solid var(--border); }
+.cat-inner { max-width: 1300px; margin: 0 auto; display: flex; padding: 15px 20px; gap: 10px; }
+.cat-btn {
+    background: #1c2128;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.cat-btn.active { border-color: var(--gold); color: white; background: #252c35; }
+
+.content-wrapper { max-width: 1300px; margin: 20px auto; padding: 0 20px; }
+.table-header, .p-row {
+    display: grid;
+    grid-template-columns: var(--col-rank) var(--col-player) var(--col-region) var(--col-tiers);
+    padding: 12px 20px;
+    align-items: center;
+}
+
+.table-header { color: var(--text-dim); font-size: 11px; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; }
+
+.p-row {
+    background: var(--bg-card);
+    margin-bottom: 6px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: 0.2s;
+}
+.p-row:hover { background: var(--bg-hover); border-color: #444; transform: translateY(-1px); }
+
+.r-num { font-weight: 900; font-style: italic; font-size: 18px; color: #444; }
+.rank-1 .r-num { color: var(--gold); }
+.rank-2 .r-num { color: #bdc3c7; }
+.rank-3 .r-num { color: #e67e22; }
+
+.p-identity { display: flex; align-items: center; gap: 20px; }
+.skin-3d-wrap {
+    width: 50px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.skin-3d { 
+    height: 100%; 
+    filter: drop-shadow(0 4px 4px rgba(0,0,0,0.5));
+    transition: transform 0.3s;
+}
+.p-row:hover .skin-3d { transform: scale(1.1) rotate(-5deg); }
+
+.p-info { display: flex; flex-direction: column; }
+.p-name { font-weight: 700; font-size: 16px; }
+.p-sub { color: var(--text-dim); font-size: 12px; margin-top: 3px; }
+
+.reg-tag {
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: #252a33;
+}
+.NA { color: #ff8080; }
+.EU { color: #80ff80; }
+
+.tier-container { display: flex; gap: 12px; justify-content: flex-end; }
+.t-unit { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.t-unit i { font-size: 13px; color: var(--text-dim); }
+.tag {
+    font-size: 10px;
+    font-weight: 900;
+    padding: 2px 6px;
+    border-radius: 3px;
+    min-width: 34px;
+    text-align: center;
+}
+.HT1 { background: rgba(241, 196, 15, 0.15); color: var(--gold); border: 1px solid rgba(241, 196, 15, 0.3); }
+.LT1 { background: rgba(255, 255, 255, 0.05); color: white; border: 1px solid rgba(255, 255, 255, 0.15); }
         
-        return `
-            <div class="player-row ${rankClass}">
-                <div class="rank-box">${player.rank}.</div>
-                
-                <div class="player-box">
-                    <img src="https://mc-heads.net/avatar/${player.name}/100" 
-                         class="player-head" 
-                         onerror="this.src='https://mc-heads.net/avatar/Steve/100'">
-                    <div class="player-details">
-                        <span class="p-name">${player.name}</span>
-                        <span class="p-stats">
-                            <i class="fas fa-shield-halved"></i> 
-                            ${player.title} (${player.points} points)
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="col-region">
-                    <span class="region-tag ${regionClass}">${player.region}</span>
-                </div>
-                
-                <div class="tiers-box">
-                    ${this.renderTiers(player.tiers)}
-                </div>
-            </div>
-        `;
-    }
-};
-
-// --- 6. FILTER & SEARCH LOGIC ---
-function renderTable(searchTerm = "") {
-    const container = document.getElementById('playerRows');
-    if (!container) return;
-
-    // Filter data based on search input
-    const filteredData = finalDataset.filter(player => 
-        player.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-    // Generate HTML for all rows
-    container.innerHTML = filteredData.map(player => Renderer.createRow(player)).join('');
-}
-
-// --- 7. INITIALIZATION ---
-document.addEventListener('DOMContentLoaded', () => {
-    // Initial Render
-    renderTable();
-
-    // Attach Search Event Listener
-    const searchInput = document.getElementById('playerSearch');
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            renderTable(e.target.value);
-        });
-    }
-});
-
-/**
- * --- DEBUGGING & UTILS ---
- * Open console (F12) and type "Pojav.getData()" to see the full list
- */
-window.Pojav = {
-    getData: () => console.log(finalDataset),
-    refresh: () => renderTable()
-};
-    
