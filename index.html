@@ -3,69 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PojavTiers | Rankings</title>
-    
+    <title>PojavTiers | Official Rankings</title>
     <link rel="stylesheet" href="style.css">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <nav class="navbar">
-        <div class="nav-wrap">
+        <div class="nav-container">
             <div class="logo">POJAV<span>TIERS</span></div>
-            
-            <div class="search-bar">
+            <div class="search-box">
                 <i class="fas fa-search"></i>
-                <input type="text" id="playerSearch" placeholder="Search player name...">
+                <input type="text" id="playerSearch" placeholder="Search player...">
             </div>
-            
-            <div class="nav-right">
-                <button class="btn-primary">Discord</button>
+            <div class="nav-links">
+                <a href="#" class="nav-item active">Rankings</a>
+                <a href="#" class="nav-item">Rules</a>
+                <a href="#" class="nav-item">Discord</a>
             </div>
         </div>
     </nav>
 
-    <div class="category-strip">
-        <div class="cat-wrap">
-            <button class="cat-btn active" data-cat="overall">
-                <i class="fas fa-circle-notch"></i> Overall
-            </button>
-            <button class="cat-btn" data-cat="ltms">
-                <i class="fas fa-sword"></i> LTMs
-            </button>
-            <button class="cat-btn" data-cat="vanilla">
-                <i class="fas fa-gem"></i> Vanilla
-            </button>
-            <button class="cat-btn" data-cat="uhc">
-                <i class="fas fa-heart"></i> UHC
-            </button>
-            <button class="cat-btn" data-cat="pot">
-                <i class="fas fa-flask"></i> Pot
-            </button>
-            <button class="cat-btn" data-cat="nethop">
-                <i class="fas fa-eye"></i> NethOP
-            </button>
-            <button class="cat-btn" data-cat="smp">
-                <i class="fas fa-bolt"></i> SMP
-            </button>
-        </div>
+    <div class="category-bar">
+        <div class="cat-inner" id="categoryList">
+            </div>
     </div>
 
-    <main class="ranking-container">
-        <div class="table-head">
-            <div class="col-rank">#</div>
-            <div class="col-player">PLAYER</div>
-            <div class="col-region">REGION</div>
-            <div class="col-tiers">TIERS</div>
+    <main class="content-wrapper">
+        <div class="table-header">
+            <div class="h-rank">#</div>
+            <div class="h-player">Player</div>
+            <div class="h-region">Region</div>
+            <div class="h-tiers">Tiers</div>
         </div>
-        
-        <div id="playerRows">
-            </div>
+        <div id="playerList"></div>
     </main>
 
+    <script src="config.js"></script>
     <script src="players.js"></script>
 </body>
 </html>
