@@ -1,263 +1,154 @@
 /**
  * =================================================================
- * POJAV TIERS - CORE DATA ENGINE (REPLICA v2.0)
+ * POJAV TIERS - ADVANCED DATA MANAGER (v3.0)
  * =================================================================
- * This file manages the player database, tier assignments, and 
- * the rendering logic for the PojavTiers ranking system.
+ * This file contains hard-coded player data to ensure consistency.
+ * It also handles searching, filtering, and HTML rendering.
  */
 
-// --- CONFIGURATION & CONSTANTS ---
-const TOTAL_ROWS = 100;
-const DEFAULT_TITLE = "Combat Master";
-const DEFAULT_POINTS = 100;
+// --- 1. CONFIGURATION ---
+const TOTAL_PLAYERS = 100;
 
-// --- ICON DEFINITIONS (Matching MCTiers Categories) ---
-const CATEGORIES = [
-    { id: 'overall', icon: 'fa-circle-notch', label: 'Overall' },
-    { id: 'ltm', icon: 'fa-sword', label: 'LTMs' },
-    { id: 'vanilla', icon: 'fa-gem', label: 'Vanilla' },
-    { id: 'uhc', icon: 'fa-heart', label: 'UHC' },
-    { id: 'pot', icon: 'fa-flask', label: 'Pot' },
-    { id: 'nethop', icon: 'fa-eye', label: 'NethOP' },
-    { id: 'smp', icon: 'fa-bolt', label: 'SMP' }
+// --- 2. THE MASTER DATABASE (Hard-coded for Stability) ---
+// Add real player names and data here to make them appear in the list.
+const playersDatabase = [
+    { rank: 1, name: "Marlowww", title: "Combat Grandmaster", points: 435, region: "NA", tiers: ["HT1", "HT1", "LT1", "LT1", "HT1", "LT1", "LT1"] },
+    { rank: 2, name: "ItzRealMe", title: "Combat Master", points: 330, region: "NA", tiers: ["HT3", "HT1", "HT1", "HT1", "LT2", "LT2", "LT2"] },
+    { rank: 3, name: "Swight", title: "Combat Master", points: 290, region: "NA", tiers: ["HT1", "HT2", "LT2", "LT2", "HT3", "HT1", "LT2"] },
+    { rank: 4, name: "coldifled", title: "Combat Master", points: 281, region: "EU", tiers: ["LT1", "LT1", "HT2", "LT1", "LT1", "HT3", "HT1"] },
+    { rank: 5, name: "Janekv", title: "Combat Ace", points: 230, region: "EU", tiers: ["LT2", "LT2", "HT3", "LT3", "LT3", "HT4", "HT1"] },
+    { rank: 6, name: "BlvckWlf", title: "Combat Ace", points: 226, region: "EU", tiers: ["LT2", "HT3", "LT3", "LT3", "HT1", "HT1", "LT2"] },
+    { rank: 7, name: "Kylaz", title: "Combat Ace", points: 226, region: "NA", tiers: ["HT1", "HT1", "LT1", "LT1", "HT1", "LT1", "LT1"] },
+    { rank: 8, name: "ninorc15", title: "Combat Ace", points: 191, region: "EU", tiers: ["HT2", "LT2", "LT2", "LT2", "HT2", "LT3", "LT2"] },
+    { rank: 9, name: "Lurrn", title: "Combat Ace", points: 186, region: "EU", tiers: ["LT3", "LT4", "HT1", "HT1", "HT2", "LT2", "LT2"] },
+    { rank: 10, name: "yMiau", title: "Combat Ace", points: 177, region: "EU", tiers: ["LT1", "LT1", "HT2", "LT1", "LT1", "HT3", "HT1"] },
+    { rank: 10, name: "Arsakha", title: "Combat Ace", points: 177, region: "AS", tiers: ["HT2", "LT2", "LT2", "HT3", "HT3", "LT3", "HT1"] },
+    { rank: 12, name: "Juan_Clean", title: "Combat Ace", points: 165, region: "NA", tiers: ["HT3", "LT3", "LT3", "LT3", "HT1", "LT1", "LT1"] },
+    { rank: 12, name: "Deivi_17", title: "Combat Ace", points: 165, region: "EU", tiers: ["LT3", "LT4", "HT4", "LT4", "HT1", "LT1", "LT2"] },
+    { rank: 14, name: "Spawnplayer", title: "Combat Ace", points: 152, region: "NA", tiers: ["HT3", "LT3", "LT3", "LT3", "HT3", "LT2", "LT2"] },
+    { rank: 15, name: "Frxnkey", title: "Combat Ace", points: 143, region: "NA", tiers: ["LT3", "LT3", "HT4", "LT3", "HT1", "HT2", "HT2"] },
+    { rank: 16, name: "Hosthan", title: "Combat Ace", points: 142, region: "EU", tiers: ["LT3", "LT3", "LT2", "LT2", "HT2", "LT2", "LT2"] },
 ];
 
-/**
- * MASTER PLAYER DATABASE
- * Add real player names here. 
- * Tiers are assigned specifically to keep them consistent on refresh.
- */
-const playersDB = [
-    {
-        rank: 1,
-        name: "Marlowww",
-        title: "Combat Grandmaster",
-        points: 435,
-        region: "NA",
-        tiers: ["HT1", "HT1", "LT1", "LT1", "HT1", "LT1", "LT1"]
-    },
-    {
-        rank: 2,
-        name: "ItzRealMe",
-        title: "Combat Master",
-        points: 330,
-        region: "NA",
-        tiers: ["HT3", "HT1", "HT1", "HT1", "LT2", "LT2", "LT2"]
-    },
-    {
-        rank: 3,
-        name: "Swight",
-        title: "Combat Master",
-        points: 290,
-        region: "NA",
-        tiers: ["HT1", "HT2", "LT2", "LT3", "HT3", "HT1", "LT2"]
-    },
-    {
-        rank: 4,
-        name: "coldifled",
-        title: "Combat Master",
-        points: 281,
-        region: "EU",
-        tiers: ["LT1", "LT1", "HT2", "LT1", "LT1", "HT3", "HT1"]
-    },
-    {
-        rank: 5,
-        name: "Janekv",
-        title: "Combat Ace",
-        points: 230,
-        region: "EU",
-        tiers: ["LT2", "LT2", "HT3", "LT3", "LT3", "HT4", "HT1"]
-    },
-    {
-        rank: 6,
-        name: "BlvckWlf",
-        title: "Combat Ace",
-        points: 226,
-        region: "EU",
-        tiers: ["LT2", "HT3", "LT3", "LT3", "HT1", "HT1", "LT2"]
-    },
-    {
-        rank: 7,
-        name: "Kylaz",
-        title: "Combat Ace",
-        points: 226,
-        region: "NA",
-        tiers: ["HT1", "HT1", "LT1", "LT1", "HT1", "LT1", "LT1"]
-    },
-    {
-        rank: 8,
-        name: "ninorc15",
-        title: "Combat Ace",
-        points: 191,
-        region: "EU",
-        tiers: ["HT2", "LT2", "LT2", "LT2", "HT2", "LT3", "LT2"]
-    },
-    {
-        rank: 9,
-        name: "Lurrn",
-        title: "Combat Ace",
-        points: 186,
-        region: "EU",
-        tiers: ["LT3", "LT4", "HT1", "HT1", "HT2", "LT2", "LT2"]
-    },
-    {
-        rank: 10,
-        name: "yMiau",
-        title: "Combat Ace",
-        points: 177,
-        region: "EU",
-        tiers: ["LT1", "LT1", "HT2", "LT1", "LT1", "HT3", "HT1"]
+// --- 3. CATEGORY ICONS (Mapped to CSS) ---
+const categoryIcons = [
+    "fa-circle-notch", // Overall
+    "fa-sword",        // LTMs
+    "fa-gem",          // Vanilla
+    "fa-heart",        // UHC
+    "fa-flask",        // Pot
+    "fa-eye",          // NethOP
+    "fa-bolt"          // SMP
+];
+
+// --- 4. DATA GENERATOR (Fill remaining 100 slots) ---
+function generateFullDataset() {
+    let dataset = [...playersDatabase];
+
+    // If database has more than 100, truncate it
+    if (dataset.length > TOTAL_PLAYERS) {
+        return dataset.slice(0, TOTAL_PLAYERS);
     }
-];
 
-/**
- * GENERATOR FOR REMAINING SLOTS
- * Ensures the table stays full (100 rows) without changing data on refresh.
- * Uses a seed-based approach so the "None" players stay consistent.
- */
-function initializeDatabase() {
-    const fullDatabase = [...playersDB];
-    
-    for (let i = fullDatabase.length + 1; i <= TOTAL_ROWS; i++) {
-        // Deterministic "None" players so they don't change every refresh
-        const pseudoRandomRegion = i % 3 === 0 ? "EU" : (i % 2 === 0 ? "NA" : "AS");
-        const pseudoPoints = 180 - i;
-        
-        fullDatabase.push({
+    // Fill remaining slots with "None"
+    for (let i = dataset.length + 1; i <= TOTAL_PLAYERS; i++) {
+        dataset.push({
             rank: i,
             name: "None",
-            title: i < 20 ? "Combat Ace" : "Combatant",
-            points: pseudoPoints > 0 ? pseudoPoints : 0,
-            region: pseudoRandomRegion,
-            tiers: ["LT3", "LT4", "LT2", "LT1", "HT3", "HT2", "LT1"]
+            title: "Combatant",
+            points: Math.max(0, 100 - (i * 1)),
+            region: i % 3 === 0 ? "EU" : "NA",
+            tiers: ["LT2", "LT3", "LT2", "LT2", "HT2", "LT2", "LT2"]
         });
     }
-    return fullDatabase;
+    return dataset;
 }
 
-const GLOBAL_DATA = initializeDatabase();
+const finalDataset = generateFullDataset();
 
-/**
- * RENDERING COMPONENT
- * Handles the creation of the HTML strings for the table.
- */
+// --- 5. RENDER ENGINE ---
 const Renderer = {
-    /**
-     * Creates the small tier icon boxes (e.g., HT1, LT2)
-     */
-    generateTierTags: function(tierArray) {
-        return tierArray.map((tierValue, index) => {
-            const iconClass = CATEGORIES[index].icon;
+    // Generate tier icons and badges
+    renderTiers: function(tierArray) {
+        return tierArray.map((tier, index) => {
+            const icon = categoryIcons[index] || "fa-circle";
             return `
-                <div class="tier-item">
-                    <i class="fas ${iconClass}"></i>
-                    <span class="tag ${tierValue}">${tierValue}</span>
+                <div class="tier-group">
+                    <i class="fas ${icon}"></i>
+                    <span class="badge ${tier}">${tier}</span>
                 </div>
             `;
         }).join('');
     },
 
-    /**
-     * Build a single player row
-     */
-    createRowHTML: function(player) {
-        // Special class for Top 3
-        const rankClass = player.rank <= 3 ? `rank-special rank-${player.rank}` : '';
+    // Create the full row HTML
+    createRow: function(player) {
+        const rankClass = `rank-${player.rank}`;
         const regionClass = `region-${player.region}`;
         
         return `
             <div class="player-row ${rankClass}">
-                <div class="col-rank">${player.rank}.</div>
+                <div class="rank-box">${player.rank}.</div>
                 
-                <div class="col-player">
-                    <div class="avatar-wrapper">
-                        <img src="https://mc-heads.net/avatar/${player.name}/100" 
-                             class="p-avatar" 
-                             onerror="this.src='https://mc-heads.net/avatar/Steve/100'">
-                    </div>
-                    <div class="player-info">
+                <div class="player-box">
+                    <img src="https://mc-heads.net/avatar/${player.name}/100" 
+                         class="player-head" 
+                         onerror="this.src='https://mc-heads.net/avatar/Steve/100'">
+                    <div class="player-details">
                         <span class="p-name">${player.name}</span>
-                        <span class="p-subtitle">
+                        <span class="p-stats">
                             <i class="fas fa-shield-halved"></i> 
                             ${player.title} (${player.points} points)
                         </span>
                     </div>
                 </div>
-
+                
                 <div class="col-region">
-                    <span class="region-box ${regionClass}">${player.region}</span>
+                    <span class="region-tag ${regionClass}">${player.region}</span>
                 </div>
-
-                <div class="col-tiers">
-                    ${this.generateTierTags(player.tiers)}
+                
+                <div class="tiers-box">
+                    ${this.renderTiers(player.tiers)}
                 </div>
             </div>
         `;
     }
 };
 
-/**
- * SEARCH & FILTER LOGIC
- */
-function updateDisplay(searchTerm = "") {
+// --- 6. FILTER & SEARCH LOGIC ---
+function renderTable(searchTerm = "") {
     const container = document.getElementById('playerRows');
     if (!container) return;
 
-    const filtered = GLOBAL_DATA.filter(player => 
+    // Filter data based on search input
+    const filteredData = finalDataset.filter(player => 
         player.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    // Using a DocumentFragment for better performance
-    const fragment = document.createDocumentFragment();
-    const tempDiv = document.createElement('div');
-    
-    tempDiv.innerHTML = filtered.map(p => Renderer.createRowHTML(p)).join('');
-    
-    while (tempDiv.firstChild) {
-        fragment.appendChild(tempDiv.firstChild);
-    }
-
-    container.innerHTML = "";
-    container.appendChild(fragment);
+    // Generate HTML for all rows
+    container.innerHTML = filteredData.map(player => Renderer.createRow(player)).join('');
 }
 
-/**
- * INITIALIZATION
- */
+// --- 7. INITIALIZATION ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Initial Load
-    updateDisplay();
+    // Initial Render
+    renderTable();
 
-    // Event Listeners for Search
+    // Attach Search Event Listener
     const searchInput = document.getElementById('playerSearch');
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
-            updateDisplay(e.target.value);
+            renderTable(e.target.value);
         });
     }
-
-    // Category Button Logic
-    const catButtons = document.querySelectorAll('.cat-btn');
-    catButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            catButtons.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            // Logic for category switching can be expanded here
-        });
-    });
 });
 
 /**
- * UTILITY FUNCTIONS
- * Exported to window so they can be accessed via console if needed for debugging.
+ * --- DEBUGGING & UTILS ---
+ * Open console (F12) and type "Pojav.getData()" to see the full list
  */
-window.PojavTiers = {
-    refresh: () => updateDisplay(),
-    getCount: () => GLOBAL_DATA.length,
-    addManualPlayer: (name) => {
-        console.log("To add a player, edit the playersDB array in players.js");
-    }
+window.Pojav = {
+    getData: () => console.log(finalDataset),
+    refresh: () => renderTable()
 };
-
-// End of players.js
-        
+    
